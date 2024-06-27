@@ -1,5 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import logo from '../assets/images/logo.png'
+import '../assets/styles/login.css'
 import { useNavigate } from 'react-router-dom';
 
 

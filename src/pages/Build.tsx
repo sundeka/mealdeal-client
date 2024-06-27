@@ -4,6 +4,7 @@ const Build = () => {
   return (
     <>
       <Header />
+      <p>build</p>
     </>
   )
 }

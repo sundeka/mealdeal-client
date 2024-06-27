@@ -4,6 +4,7 @@ const Create = () => {
   return (
     <>
       <Header />
+      <p>create</p>
     </>
   )
 }

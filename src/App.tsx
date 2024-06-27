@@ -7,7 +7,6 @@ import Home from './pages/Home';
 import Create from './pages/Create';
 import Browse from './pages/Browse';
 import Build from './pages/Build';
-import Header from './components/Header/Header';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false)

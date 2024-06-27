@@ -1,0 +1,31 @@
+.settingsDropdown {
+    margin-right: -5vh;
+}
+
+.settingsDropdownButton {
+    background-color: #ce954b;
+    border: 0px;
+    height: 2vh;
+}
+
+.settingsDropdownButton:active {
+    transform: scale(0.95);
+}
+
+.settingsDropdownIcon {
+    height: 100%;
+    width: 100%;
+}
+
+.settingsDropdownContent {
+    background: white;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    border: 2px;
+    border-radius: 3px;
+}
+
+.settingsDropdownText {
+    padding: 10px;
+}
