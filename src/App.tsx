@@ -1,25 +1,29 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import './assets/styles/index.css'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./pages/Login";
+import NotFound from './pages/NotFound';
+import Home from './pages/Home';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState<boolean>(false)
+  console.log(loggedIn)
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Login setLoggedIn={setLoggedIn}/>} />
+        <Route
+          path="home"
+          element={
+            <PrivateRoute isLoggedIn={loggedIn} >
+              <Home />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
