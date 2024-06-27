@@ -1,12 +1,12 @@
 import Header from "../components/Header/Header"
 
-const Home = () => {
+const Browse = () => {
   return (
     <>
       <Header />
-      <p>home</p>
+      <h1>Browse</h1>
     </>
   )
 }
 
-export default Home
+export default Browse

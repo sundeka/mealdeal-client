@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import logo from '../assets/images/logo.png'
 import { useNavigate } from 'react-router-dom';
 
+
 interface LoginProps {
   setLoggedIn: (value: boolean) => void;
 }
@@ -21,8 +22,6 @@ const Login = (props: LoginProps) => {
 
   const onLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    console.log(username)
-    console.log(password)
     props.setLoggedIn(true)
     navigate('/home');
   }

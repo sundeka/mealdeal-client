@@ -1,12 +1,11 @@
 import Header from "../components/Header/Header"
 
-const Home = () => {
+const Build = () => {
   return (
     <>
       <Header />
-      <p>home</p>
     </>
   )
 }
 
-export default Home
+export default Build

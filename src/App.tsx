@@ -1,26 +1,24 @@
-import { useState } from 'react';
+ import { useState } from 'react';
 import './assets/styles/index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import NotFound from './pages/NotFound';
 import Home from './pages/Home';
-import PrivateRoute from './components/PrivateRoute';
+import Create from './pages/Create';
+import Browse from './pages/Browse';
+import Build from './pages/Build';
+import Header from './components/Header/Header';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false)
-  console.log(loggedIn)
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login setLoggedIn={setLoggedIn}/>} />
-        <Route
-          path="home"
-          element={
-            <PrivateRoute isLoggedIn={loggedIn} >
-              <Home />
-            </PrivateRoute>
-          }
-        />
+        <Route path="/home" element={<Home />}/>
+        <Route path="/create" element={<Create/>}/>
+        <Route path="/browse" element={<Browse/>}/>
+        <Route path="/build" element={<Build/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

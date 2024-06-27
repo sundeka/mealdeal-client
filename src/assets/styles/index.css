@@ -1,6 +1,7 @@
 html, body, #root {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
+    flex-direction: column;
     background-color: burlywood;
     height: 100%;
     margin: 0;
@@ -10,6 +11,41 @@ html, body, #root {
 
 h1 {
     color: white;
+}
+
+header {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px inset #000000;
+    background-color: #ce954b;
+}
+
+.headerLeft {
+    display: flex;
+    width: 70%;
+    justify-content: flex-start;
+}
+
+.headerRight {
+    display: flex;
+    width: 30%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.headerLogo {
+    width: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.homeRoot {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .loginRoot {
