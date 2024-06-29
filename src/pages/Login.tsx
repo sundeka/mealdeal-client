@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, useState } from 'react';
 import logo from '../assets/images/logo.png'
 import '../assets/styles/login.css'
 import { useNavigate } from 'react-router-dom';
+import ButtonMajor from '../components/Buttons/ButtonMajor';
 
 
 interface LoginProps {
@@ -34,11 +35,11 @@ const Login = (props: LoginProps) => {
       </div>
       <div className='loginBox'>
         <form className='loginForm' onSubmit={onLogin}>
-          <label htmlFor="username">Username:</label>
+          <label className="loginFormLabel" htmlFor="username">Username:</label>
           <input type="text" id="username" name="username" onChange={handleUsernameChange} value={username} />
-          <label htmlFor="password">Password:</label>
+          <label className="loginFormLabel" htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" onChange={handlePasswordChange} value={password} />
-          <input type="submit" value="Login" />
+          <ButtonMajor text="Login" action={() => onLogin} />
         </form>
       </div>
     </div>

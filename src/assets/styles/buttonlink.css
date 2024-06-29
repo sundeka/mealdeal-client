@@ -1,0 +1,15 @@
+.button-link {
+    display: flex;
+    height: 4vh;
+    width: 7vh;
+    border: 2px;
+    border-radius: 10px;
+    justify-content: center;
+    align-items: center;
+    background-color: #9d3e3e;
+}
+
+.button-link a {
+    color: white;
+    text-decoration: unset;
+}

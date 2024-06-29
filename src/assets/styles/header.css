@@ -19,9 +19,9 @@ header {
     justify-content: flex-start;
 }
 
-.headerRight {
+.headerNav {
     display: flex;
-    width: 30%;
+    width: 20%;
     justify-content: space-evenly;
     align-items: center;
 }
@@ -30,5 +30,12 @@ header {
     width: 10vh;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.headerActions {
+    display: flex;
+    width: 10%;
+    justify-content: space-evenly;
     align-items: center;
 }

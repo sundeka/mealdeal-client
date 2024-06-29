@@ -1,7 +1,3 @@
-.settingsDropdown {
-    margin-right: -5vh;
-}
-
 .settingsDropdownButton {
     background-color: #ce954b;
     border: 0px;
@@ -18,7 +14,7 @@
 }
 
 .settingsDropdownContent {
-    background: white;
+    background: #876548;
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -27,5 +23,6 @@
 }
 
 .settingsDropdownText {
+    color: white;
     padding: 10px;
 }
