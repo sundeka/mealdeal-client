@@ -6,7 +6,7 @@ import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import Create from './pages/Create';
 import Browse from './pages/Browse';
-import Build from './pages/Build';
+import Plans from './pages/Plans';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false)
@@ -17,7 +17,7 @@ function App() {
         <Route path="/home" element={<Home />}/>
         <Route path="/create" element={<Create/>}/>
         <Route path="/browse" element={<Browse/>}/>
-        <Route path="/build" element={<Build/>}/>
+        <Route path="/plans" element={<Plans/>}/>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

@@ -22,9 +22,9 @@ const Header = () => {
           <h1>MealDeal</h1>
         </div>
         <div className="headerNav">
-          <ButtonLink text="Create" to="../create"></ButtonLink>
-          <ButtonLink text="Browse" to="../browse"></ButtonLink>
-          <ButtonLink text="Build" to="../build"></ButtonLink> 
+          <ButtonLink text="Create meal" to="../create"></ButtonLink>
+          <ButtonLink text="Browse meals" to="../browse"></ButtonLink>
+          <ButtonLink text="Meal plans" to="../plans"></ButtonLink> 
         </div>
         <div className="headerActions">
           <SettingsDropdown />
