@@ -4,7 +4,7 @@
     flex-direction: column;
     border: 2px;
     border-radius: 10px;
-    box-shadow: 0px 0px 5px 0px black;
+    box-shadow: 0px 0px 1.5px 0px black;
     height: 10vh;
     width: 10vh;
 }
@@ -40,4 +40,22 @@
 
 .homeStatistics h2 {
     align-self: center;
+}
+
+.insert-food {
+    margin-left: 20px;
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+    height: 80px;
+    width: 82%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.current-meal {
+    padding-inline-start: 20px;
+    padding-inline-end: 20px;
+    width: 82%;
+    margin-left: 20px;
+    height: 450px;
 }

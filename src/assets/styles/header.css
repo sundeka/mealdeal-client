@@ -1,6 +1,7 @@
 header {
     display: flex;
     width: 100%;
+    height: 100px;
     border-bottom: 1px inset #000000;
     background-color: #ce954b;
 }
@@ -11,6 +12,7 @@ header {
     flex-direction: column;
     align-items: center;
     width: 100%;
+    height: 100px;
 }
 
 .headerLeft {

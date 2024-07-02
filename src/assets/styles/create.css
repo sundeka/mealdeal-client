@@ -1,0 +1,48 @@
+.createRoot {
+    display: flex;
+    height: 100%;
+}
+
+.insert-root {
+    width: 100%;
+    height: 100%;
+}
+
+.createMetadata {
+    width: 100%;
+    height: 100%;
+    background-color: bisque;
+}
+
+.createContent {
+    width: 100%;
+    height: 100%;
+    background-color: #c19967;
+}
+
+.insert-wrapper-panel {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-block-start: 5px;
+    width: 100%;
+}
+
+.create-card-label {
+    align-self: flex-start;
+}
+
+.create-input {
+    align-self: flex-start;
+}
+
+.insert-dropdown {
+    align-self: flex-start;
+    width: 80%;
+    height: 25px;
+}
+
+.insert-button-add {
+    align-self: center;
+    width: 200px;
+}
