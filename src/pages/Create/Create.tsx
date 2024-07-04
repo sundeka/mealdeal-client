@@ -1,13 +1,21 @@
 import '../../assets/styles/create.css'
+import { useState } from 'react'
 import Header from "../../components/Header/Header"
 import Insert from './Insert'
+import { Food } from '../../schema'
+import CurrentMeal from './CurrentMeal'
 
 const Create = () => {
+  const [currentMeal, setCurrentMeal] = useState<Food[]>([])
+  //const [currentMeal, setCurrentMeal] = useState<Map<string, Food>>();
   return (
     <>
       <Header />
       <div className="createRoot">
-        <Insert />
+        <div className="insert-root">
+          <Insert currentMeal={currentMeal} setCurrentMeal={setCurrentMeal}/>
+          <CurrentMeal currentMeal={currentMeal} setCurrentMeal={setCurrentMeal}/>
+        </div>
         <div className="createMetadata">
           <p>metadata</p>
         </div>
