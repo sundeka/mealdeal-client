@@ -1,5 +1,5 @@
 import '../../assets/styles/create.css'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from "../../components/Header/Header"
 import Insert from './Insert'
 import { Food } from '../../schema'
@@ -8,6 +8,11 @@ import CurrentMeal from './CurrentMeal'
 const Create = () => {
   const [currentMeal, setCurrentMeal] = useState<Food[]>([])
   //const [currentMeal, setCurrentMeal] = useState<Map<string, Food>>();
+
+  useEffect(() => {
+    console.log("updating meal contents...")
+  }, [currentMeal])
+  
   return (
     <>
       <Header />
