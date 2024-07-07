@@ -1,4 +1,6 @@
-
+/* 
+Login
+*/
 
 .login-root {
     width: 100%;
@@ -53,4 +55,86 @@
 
 .login-box__form__login-button {
     height: 40px;
+}
+
+/* 
+Header
+*/
+
+.header {
+    border-bottom: thin solid black;
+    position: sticky;
+    top: 0;
+    height: 75px;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header__container-logo {
+    height: 100%;
+    width: 15vw;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+
+.header__container-navigation {
+    height: 100%;
+    width: 74vw;
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.header__container-actions {
+    height: 100%;
+    width: 185px;
+    min-width: 185px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+.container-logo__box {
+    border-style: solid;
+    border-width: thin;
+    width: 40px;
+    height: 40px;
+}
+
+.container-logo__box__img {
+    width: 100%;
+}
+
+.container-logo__text {
+    padding-left: 5px;
+}
+
+.container-actions__settings {
+    border-style: solid;
+    border-width: thin;
+    width: 40px;
+    height: 40px;
+}
+
+.container-actions__logout {
+    text-transform: uppercase;
+    height: 30px;
 }
