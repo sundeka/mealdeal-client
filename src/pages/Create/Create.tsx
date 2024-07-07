@@ -12,22 +12,24 @@ const Create = () => {
   useEffect(() => {
     console.log("updating meal contents...")
   }, [currentMeal])
-  
+
+
   return (
     <>
       <Header />
-      <div className="createRoot">
-        <div className="insert-root">
+      <div className='create-root'>
+        <div id='lane' className='create-root__new'>
           <Insert currentMeal={currentMeal} setCurrentMeal={setCurrentMeal}/>
           <CurrentMeal currentMeal={currentMeal} setCurrentMeal={setCurrentMeal}/>
         </div>
-        <div className="createMetadata">
-          <p>metadata</p>
+        <div id='lane' className='create-root__metadata'>
+
         </div>
-        <div className="createContent">
-          <p>content</p>
+        <div id='lane' className='create-root__meal-content'>
+
         </div>
       </div>
+      
     </>
   )
 }
