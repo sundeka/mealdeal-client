@@ -1,3 +1,16 @@
+/*
+General
+*/
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+strong {
+    font-weight: bold;
+}
+
 /* 
 Login
 */
@@ -66,7 +79,6 @@ Header
     position: sticky;
     top: 0;
     height: 75px;
-    width: 100%;
     z-index: 1000;
     display: flex;
     flex-direction: row;
@@ -137,4 +149,79 @@ Header
 .container-actions__logout {
     text-transform: uppercase;
     height: 30px;
+}
+
+/*
+Home
+*/
+
+.home-root {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    min-width: 648px;
+}
+
+.home-root__h1 {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.home-root__intro-container {
+    width: 530px;
+    height: 220px;
+    padding: 10px;
+    border-style: solid;
+    border-width: thin;
+}
+
+.introduction-text {
+    font-size: larger;
+}
+
+.intro-container__introduction {
+    padding-bottom: 15px;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.intro-container__statistics-container {
+    width: 55%;
+    margin-top: 15px;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.statistics-container__header {
+    font-size: larger;
+    padding-bottom: 10px;
+}
+
+.statistics-container__stat-row {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 260px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.stat-row--dot {
+    font-size: xx-large;
+}
+
+.stat-row--name {
+    font-style: italic;
+}
+
+.stat-row--stat {
+    font-weight: bold;
 }
