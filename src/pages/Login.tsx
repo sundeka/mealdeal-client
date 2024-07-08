@@ -20,7 +20,7 @@ const Login = (props: LoginProps) => {
     setPassword(e.target.value)
   }
 
-  const onLogin = (e: FormEvent<HTMLFormElement>) => {
+  const onLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     props.setLoggedIn(true)
     navigate('/home');
@@ -35,7 +35,7 @@ const Login = (props: LoginProps) => {
         </div>
         <div style={{height: 60}}/>
         <div className='login-container__login-box'>
-          <form className='login-box__form' onSubmit={onLogin}>
+          <div className='login-box__form'>
             <label>Username:</label>
             <div style={{height: 5}}/>
             <input/>
@@ -44,8 +44,8 @@ const Login = (props: LoginProps) => {
             <div style={{height: 5}}/>
             <input/>
             <div style={{height: 30}}/>
-            <input className='login-box__form__login-button' type="submit" value="Login" />
-          </form>
+            <button className='login-box__form__login-button' onClick={onLogin}>Login</button>
+          </div>
         </div>
       </div>
     </div>

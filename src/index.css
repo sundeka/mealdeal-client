@@ -21,6 +21,10 @@ strong {
     font-weight: bold;
 }
 
+button {
+    background-color: rgb(200, 191, 231)
+}
+
 /* 
 Login
 */
