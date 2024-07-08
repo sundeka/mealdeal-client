@@ -1,26 +1,36 @@
-import '../assets/styles/home.css'
-import Card from '../components/Card/Card'
-import CardText from '../components/Card/CardText'
-import CardTitle from '../components/Card/CardTitle'
 import Header from "../components/Header/Header"
 
 const Home = () => {
   return (
     <>
       <Header />
-      <div className="homeRoot">
-        <Card className="homeIntro">
-          <CardTitle className="homeIntro-h2">Welcome to MealDeal, *user*!</CardTitle>
-          <CardText>MealDeal is an application that allows x. Cras pretium sapien tortor, ac rhoncus est viverra ac. Sed vehicula vel arcu et elementum. Sed finibus nisi eu lacus congue commodo.</CardText>
-          <CardText>screenshot1|screenshot2|screenshot3</CardText>
-          <CardText>Maecenas condimentum eros odio, et tincidunt felis commodo eget. Aliquam scelerisque congue leo, sed malesuada ante vehicula eget. Cras purus libero, porttitor id dolor vel, elementum euismod nisl. Morbi non finibus augue, sed feugiat arcu. Quisque euismod venenatis laoreet. Donec vel dignissim magna, a lobortis quam. Quisque in pellentesque purus. Nunc sed egestas lorem.</CardText>
-        </Card>
-        <Card className="homeStatistics">
-          <CardTitle className="homeStatistics-h2">Statistics about you:</CardTitle>
-          <CardText className="homeStatistics-p">Name: username1234</CardText>
-          <CardText className="homeStatistics-p">Account created: 29.06.2024 12:03</CardText>
-          <CardText className="homeStatistics-p">Created meals: 22</CardText>
-        </Card>
+      <div className='home-root'>
+        <h1 className='home-root__h1'>Welcome to MealDeal!</h1>
+        <div className='home-root__intro-container'>
+          <div className='intro-container__introduction'>
+            <p className='introduction-text'>
+            <strong>MealDeal</strong> is an application that allows x. 
+            Cras pretium sapien tortor, ac rhoncus est viverra ac. 
+            Sed vehicula vel arcu et elementum. 
+            Sed finibus nisi eu lacus congue commodo.
+            </p>
+          </div>
+          <div className='intro-container__statistics-container'>
+            <p className='statistics-container__header'>Here are some statistics about you:</p>
+            <div className='statistics-container__stat-row'>
+              <p className='stat-row--name'>Name:</p>
+              <p className='stat-row--stat'>username1234</p>
+            </div>
+            <div className='statistics-container__stat-row'>
+              <p className='stat-row--name'>Account created:</p>
+              <p className='stat-row--stat'>29.06.2024 12:03</p>
+            </div>
+            <div className='statistics-container__stat-row'>
+              <p className='stat-row--name'>Created meals:</p>
+              <p className='stat-row--stat'>22</p>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   )

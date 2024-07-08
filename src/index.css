@@ -1,0 +1,497 @@
+/*
+General
+*/
+
+h1 {
+    font-size: 2em;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+h3 {
+    font-size: 1.17em;
+    font-weight: bold;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* 
+Login
+*/
+
+.login-root {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.login-root__login-container {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    width: 25vw;
+    max-width: 25vw;
+    min-width: 300px;
+
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-bottom: 0;
+}
+
+.login-container__logo-box {
+    width: 100px;
+    height: 100px;
+
+    border-style: solid;
+    border-width: thin;
+}
+
+.login-container__logo-box__img {
+    width: 100%;
+}
+
+.login-container__login-box {
+    width: 75%;
+    height: 250px;
+
+    border-style: solid;
+    border-width: thin;
+}
+
+.login-box__form {
+    display: flex;
+    align-items: stretch;
+    flex-direction: column;
+    padding-top: 30px;
+    padding-left: 60px;
+    padding-right: 60px;
+}
+
+.login-box__form__login-button {
+    height: 40px;
+}
+
+/* 
+Header
+*/
+
+.header {
+    border-bottom: thin solid black;
+    position: sticky;
+    top: 0;
+    height: 75px;
+    z-index: 1000;
+    display: flex;
+    flex-direction: row;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.header__container-logo {
+    height: 100%;
+    width: 15vw;
+    min-width: 120px;
+    display: flex;
+    align-items: center;
+
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-bottom: 0;
+    border-left: 0;
+}
+
+.header__container-navigation {
+    height: 100%;
+    width: 74vw;
+    min-width: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.header__container-actions {
+    height: 100%;
+    width: 185px;
+    min-width: 185px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-bottom: 0;
+    border-right: 0;
+}
+
+.container-logo__box {
+    border-style: solid;
+    border-width: thin;
+    width: 40px;
+    height: 40px;
+}
+
+.container-logo__box__img {
+    width: 100%;
+}
+
+.container-logo__text {
+    padding-left: 5px;
+}
+
+.container-actions__settings {
+    border-style: solid;
+    border-width: thin;
+    width: 40px;
+    height: 40px;
+}
+
+.container-actions__logout {
+    text-transform: uppercase;
+    height: 30px;
+}
+
+/*
+Home
+*/
+
+.home-root {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: column;
+    min-width: 648px;
+}
+
+.home-root__h1 {
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+
+.home-root__intro-container {
+    width: 530px;
+    height: 220px;
+    padding: 10px;
+    border-style: solid;
+    border-width: thin;
+}
+
+.introduction-text {
+    font-size: larger;
+}
+
+.intro-container__introduction {
+    padding-bottom: 15px;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.intro-container__statistics-container {
+    width: 55%;
+    margin-top: 15px;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-bottom: 0;
+}
+
+.statistics-container__header {
+    font-size: larger;
+    padding-bottom: 10px;
+}
+
+.statistics-container__stat-row {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    width: 260px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.stat-row--name {
+    font-style: italic;
+}
+
+.stat-row--stat {
+    font-weight: bold;
+}
+
+/*
+Create
+*/
+
+.create-root {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: 70vh;
+    gap: 3vw;
+    min-width: 608px;
+    min-height: 600px;
+    border-style: dotted;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    padding-top: 25px;
+    padding-left: 10%;
+    padding-right: 10%;
+}
+
+.create-root__new {
+    min-height: 510px;
+}
+
+.create-root #lane {
+    width: 100%;
+    min-width: 280px;
+    border-style: solid;
+    border-width: thin;
+    padding: 20px;
+}
+
+.create-root__new #food-name {
+    width: 40%;
+}
+
+.create-root__new #food-amount {
+    width: 40%;
+}
+
+.new__add-food-label-row {
+    display: flex;
+    padding-bottom: 5px;
+    width: 100%;
+}
+
+.new__add-food {
+    display: flex;
+    align-items: center;
+    gap: 5%;
+    padding-bottom: 20px;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.add-food__button {
+    width: 20%;
+}
+
+.new__current-meal-container {
+    width: 100%;
+    height: 400px;
+    margin-top: 20px;
+}
+
+.current-meal-container__table {
+    border-style: solid;
+    border-width: thin;
+    width: 100%;
+    height: 100%;
+    margin-top: 5px;
+}
+
+.table__empty-table {
+    margin: 10px;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px
+}
+
+.table__table-frame {
+    width: 100%;
+    text-align: left
+}
+
+.table-frame__column {
+    width: 50%;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.table-frame__row {
+
+}
+
+.row__delete-button {
+    height: 17px;
+}
+
+/*
+Meal content
+*/
+
+.create-root__meal-content {
+    min-height: 510px;
+}
+
+.meal-content__table-wrapper {
+    padding-top: 20px;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.table-wrapper__disclaimer {
+    font-size: smaller;
+}
+
+.table-wrapper__table {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 97%;
+    height: 50%;
+    border-style: solid;
+    border-width: thin;
+    display: flex;
+    flex-direction: column;
+}
+
+.table-wrapper__table #row {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: inherit;
+}
+
+.table-wrapper__table #row #sub-row {
+    text-indent: 30px;
+    font-style: italic;
+}
+
+.table__header {
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.table__header span {
+    font-weight: bold;
+}
+
+.table__cell--a {
+    width: 400px;
+}
+
+.table__cell--b {
+    width: 200px;
+}
+
+.table__cell--c {
+    width: 60px;
+    text-align: end;
+}
+
+/*
+Metadata
+*/
+
+.create-root__metadata {
+    height: 63%;
+    min-height: 380px;
+}
+
+#lane-title {
+    text-align: center;
+    height: 42px;
+    padding-bottom: 20px;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+
+.create-root__metadata #info {
+    height: 70%;
+
+    border-style: dashed;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.create-root__metadata #actions {
+    height: 34%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.metadata__input-area {
+    padding-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+.metadata__input-area #labels {
+    height: 100%;
+    width: 10vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.metadata__input-area #labels label {
+    font-weight: bolder;
+    font-size: large;
+    padding-bottom: 25px;
+}
+
+.metadata__input-area #labels #label--description {
+    padding-bottom: 5px;
+}
+
+.metadata__input-area #labels #label--optional {
+    font-size: small;
+}
+
+.metadata__input-area #inputs {
+    height: 100%;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+}
+
+.metadata__input-area #inputs #description {
+    resize: none;
+    height: 75px;
+}
+
+.create-root__metadata #actions button {
+    height: 75px;
+    width: 80%;
+    text-transform: uppercase;
+}

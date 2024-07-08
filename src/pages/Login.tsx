@@ -1,8 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import logo from '../assets/images/logo.png'
-import '../assets/styles/login.css'
 import { useNavigate } from 'react-router-dom';
-import ButtonMajor from '../components/Buttons/ButtonMajor';
 
 
 interface LoginProps {
@@ -29,18 +27,26 @@ const Login = (props: LoginProps) => {
   }
 
   return (
-    <div className='loginRoot'>
-      <div className='loginLogoDiv'>
-        <img className='loginLogoImage' src={logo} alt="MealDeal logo" />
-      </div>
-      <div className='loginBox'>
-        <form className='loginForm' onSubmit={onLogin}>
-          <label className="loginFormLabel" htmlFor="username">Username:</label>
-          <input type="text" id="username" name="username" onChange={handleUsernameChange} value={username} />
-          <label className="loginFormLabel" htmlFor="password">Password:</label>
-          <input type="password" id="password" name="password" onChange={handlePasswordChange} value={password} />
-          <ButtonMajor text="Login" action={() => onLogin} />
-        </form>
+    <div className='login-root'>
+      <div className='login-root__login-container'>
+        <div style={{height: 100}}/>
+        <div className='login-container__logo-box'>
+          <img className='login-container__logo-box__img' src={logo} alt="MealDeal logo" />
+        </div>
+        <div style={{height: 60}}/>
+        <div className='login-container__login-box'>
+          <form className='login-box__form' onSubmit={onLogin}>
+            <label>Username:</label>
+            <div style={{height: 5}}/>
+            <input/>
+            <div style={{height: 10}}/>
+            <label>Password:</label>
+            <div style={{height: 5}}/>
+            <input/>
+            <div style={{height: 30}}/>
+            <input className='login-box__form__login-button' type="submit" value="Login" />
+          </form>
+        </div>
       </div>
     </div>
   )

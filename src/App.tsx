@@ -1,5 +1,6 @@
  import { useState } from 'react';
-import './assets/styles/index.css'
+import './reset.css'
+import './index.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./pages/Login";
 import NotFound from './pages/NotFound';
