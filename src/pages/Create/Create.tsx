@@ -1,4 +1,3 @@
-import '../../assets/styles/create.css'
 import { useEffect, useState } from 'react'
 import Header from "../../components/Header/Header"
 import Insert from './Insert'

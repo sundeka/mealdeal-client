@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import '../../assets/styles/create.css'
-import ButtonMajor from '../../components/Buttons/ButtonMajor'
-import Card from '../../components/Card/Card'
 import { Food } from '../../schema';
 
 interface InsertProps {

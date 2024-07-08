@@ -1,7 +1,3 @@
-import '../assets/styles/home.css'
-import Card from '../components/Card/Card'
-import CardText from '../components/Card/CardText'
-import CardTitle from '../components/Card/CardTitle'
 import Header from "../components/Header/Header"
 
 const Home = () => {

@@ -1,7 +1,4 @@
-import '../../assets/styles/create.css'
-import { useState } from 'react'
 import { Food } from '../../schema'
-import Card from '../../components/Card/Card'
 
 interface CurrentMealProps {
     currentMeal: Food[]

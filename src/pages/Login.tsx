@@ -1,7 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import logo from '../assets/images/logo.png'
 import { useNavigate } from 'react-router-dom';
-import ButtonMajor from '../components/Buttons/ButtonMajor';
 
 
 interface LoginProps {

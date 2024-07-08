@@ -1,8 +1,5 @@
 import logo from '../../assets/images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
-import ButtonMajor from '../Buttons/ButtonMajor';
-import SettingsDropdown from '../Settings/SettingsDropdown';
-import ButtonLink from '../Buttons/ButtonLink';
 
 const Header = () => {
   const navigate = useNavigate();
