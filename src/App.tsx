@@ -8,20 +8,25 @@ import Home from './pages/Home';
 import Create from './pages/Create/Create';
 import Browse from './pages/Browse';
 import Plans from './pages/Plans';
+import { QueryClient, QueryClientProvider } from 'react-query';
+
+const queryClient = new QueryClient()
 
 function App() {
   const [loggedIn, setLoggedIn] = useState<boolean>(false)
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Login setLoggedIn={setLoggedIn}/>} />
-        <Route path="/home" element={<Home />}/>
-        <Route path="/create" element={<Create/>}/>
-        <Route path="/browse" element={<Browse/>}/>
-        <Route path="/plans" element={<Plans/>}/>
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Login setLoggedIn={setLoggedIn}/>} />
+          <Route path="/home" element={<Home />}/>
+          <Route path="/create" element={<Create/>}/>
+          <Route path="/browse" element={<Browse/>}/>
+          <Route path="/plans" element={<Plans/>}/>
+          <Route path="*" element={<NotFound />} />
+        </Routes>
+      </BrowserRouter>
+    </QueryClientProvider>
   );
 }
 

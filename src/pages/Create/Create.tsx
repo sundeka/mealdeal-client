@@ -1,7 +1,7 @@
 import { useState } from 'react'
+import { Food } from '../../schema'
 import Header from "../../components/Header/Header"
 import Insert from './Insert'
-import { Food } from '../../schema'
 import CurrentMeal from './CurrentMeal'
 import Metadata from './Metadata'
 import MealContent from './MealContent'
