@@ -18,13 +18,21 @@ const Create = () => {
     });
   }
 
+  const deleteFood = (id: string) => {
+    setCurrentMeal((prevMeal: Map<string, Food>) => {
+      const newMeal = new Map(prevMeal);
+      newMeal.delete(id)
+      return newMeal;
+    });
+  }
+
   return (
     <>
       <Header />
       <div className='create-root'>
         <div id='lane' className='create-root__new'>
           <Insert currentMeal={currentMeal} addFood={addFood}/>
-          <CurrentMeal currentMeal={currentMeal} setCurrentMeal={setCurrentMeal}/>
+          <CurrentMeal currentMeal={currentMeal} setCurrentMeal={setCurrentMeal} deleteFood={deleteFood}/>
         </div>
         <div id='lane' className='create-root__meal-content'>
           <MealContent />

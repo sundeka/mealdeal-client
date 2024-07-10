@@ -3,13 +3,10 @@ import { Food } from '../../schema'
 interface CurrentMealProps {
   currentMeal: Map<string, Food>
   setCurrentMeal: React.Dispatch<React.SetStateAction<Map<string, Food>>>
+  deleteFood: (id: string) => void
 }
 
 const CurrentMeal = (props: CurrentMealProps) => {
-
-  const onDelete = (id: string) => {
-    console.log(id)
-  }
   
   const onReset = () => {
     props.setCurrentMeal(new Map<string, Food>())
@@ -35,7 +32,7 @@ const CurrentMeal = (props: CurrentMealProps) => {
             <div id='row' key={id}>
               <span className='table__cell--a'>{food.name}</span>
               <span className='table__cell--b'>{food.amount} g</span>
-              <button className='row__delete-button' onClick={() => console.log(id)}>
+              <button className='row__delete-button' onClick={() => props.deleteFood(id)}>
                 {/*img*/}
               </button>
             </div>
