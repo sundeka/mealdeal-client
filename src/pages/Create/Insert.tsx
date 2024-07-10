@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Food } from '../../schema';
 
 interface InsertProps {
-  currentMeal: Food[]
-  setCurrentMeal: React.Dispatch<Food[]>
+  currentMeal: Map<string, Food>
+  addFood: any
 }
 
 const Insert = (props: InsertProps) => {
@@ -17,9 +17,7 @@ const Insert = (props: InsertProps) => {
 
   const onClickAdd = () => {
     if (food) {
-      //TODO: generate hash and use hashtable for each entry instead of list (helps deletion)
-      const payload: Food = { id: id, name: food, amount: grams }
-      props.setCurrentMeal([...props.currentMeal, payload])
+      props.addFood(id, food, grams)
     }
   }
 

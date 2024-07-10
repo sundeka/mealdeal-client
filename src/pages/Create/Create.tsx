@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Header from "../../components/Header/Header"
 import Insert from './Insert'
 import { Food } from '../../schema'
@@ -7,20 +7,23 @@ import Metadata from './Metadata'
 import MealContent from './MealContent'
 
 const Create = () => {
-  const [currentMeal, setCurrentMeal] = useState<Food[]>([])
-  //const [currentMeal, setCurrentMeal] = useState<Map<string, Food>>();
+  const [currentMeal, setCurrentMeal] = useState<Map<string, Food>>(new Map<string, Food>());
 
-  useEffect(() => {
-    console.log("updating meal contents...")
-  }, [currentMeal])
-
+  const addFood = (id: string, name: string, amount: number) => {
+    const payload: Food = { id, name, amount };
+    setCurrentMeal((prevMeal: Map<string, Food>) => {
+        const newMeal = new Map(prevMeal);
+        newMeal.set(id, payload);
+        return newMeal;
+    });
+  }
 
   return (
     <>
       <Header />
       <div className='create-root'>
         <div id='lane' className='create-root__new'>
-          <Insert currentMeal={currentMeal} setCurrentMeal={setCurrentMeal}/>
+          <Insert currentMeal={currentMeal} addFood={addFood}/>
           <CurrentMeal currentMeal={currentMeal} setCurrentMeal={setCurrentMeal}/>
         </div>
         <div id='lane' className='create-root__meal-content'>

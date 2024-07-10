@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Food } from '../../schema'
 
 interface MetadataProps {
-  currentMeal: Food[]
+  currentMeal: Map<string, Food>
 }
 
 const Metadata = (props: MetadataProps) => {
@@ -31,6 +31,7 @@ const Metadata = (props: MetadataProps) => {
           <div id='inputs'>
             <input required onChange={onChangeName} id='name' />
             <select required onChange={onChangeType}id='type'>
+              <option value="">Select type</option>
               <option>A</option>
               <option>B</option>
             </select>
@@ -39,7 +40,7 @@ const Metadata = (props: MetadataProps) => {
         </div>
       </div>
       <div id='actions'>
-        <button disabled={!(name && type && (props.currentMeal.length > 0))}>Add food</button>
+        <button disabled={!(name && type && (props.currentMeal.size > 0))}>Add food</button>
       </div>
       
     </>

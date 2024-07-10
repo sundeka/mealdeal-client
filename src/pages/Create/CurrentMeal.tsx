@@ -1,50 +1,61 @@
 import { Food } from '../../schema'
 
 interface CurrentMealProps {
-    currentMeal: Food[]
-    setCurrentMeal: React.Dispatch<Food[]>
-  }
+  currentMeal: Map<string, Food>
+  setCurrentMeal: React.Dispatch<React.SetStateAction<Map<string, Food>>>
+}
 
 const CurrentMeal = (props: CurrentMealProps) => {
 
   const onDelete = (id: string) => {
     console.log(id)
   }
+  
+  const onReset = () => {
+    props.setCurrentMeal(new Map<string, Food>())
+  }
 
   const renderTable = () => {
-    if (props.currentMeal.length < 1) {
+    if (props.currentMeal.size < 1) {
       return (
         <div className='table__empty-table'>
-            <h3>It's empty in here...</h3>
-            <p>Start above by adding a new food to your meal.</p>
+          <h3>It's empty in here...</h3>
+          <p>Start above by adding a new food to your meal.</p>
         </div>
       )
     }
     return (
-      <table className='table__table-frame'>
-        <tr>
-          <th className='table-frame__column'>Name</th>
-          <th className='table-frame__column'>Amount (g)</th>
-          <th></th>
-        </tr>
-          {
-            props.currentMeal.map((food: Food) => {
-              return (
-                <tr className='table-frame__row'>
-                  <td>{food.name}</td>
-                  <td>{food.amount}</td>
-                  <td><button className='row__delete-button' /></td>
-                </tr>
-              )
-            })
-          }
-      </table>
+      <div className='table__table-frame'>
+        <div className='table__header' id='row'>
+          <span className='table__cell--a'>Food name</span>
+          <span className='table__cell--b'>Amount</span>
+          <span className='table__cell--c'></span>
+        </div>
+          {Array.from(props.currentMeal.entries()).map(([id, food]) => (
+            <div id='row' key={id}>
+              <span className='table__cell--a'>{food.name}</span>
+              <span className='table__cell--b'>{food.amount} g</span>
+              <button className='row__delete-button' onClick={() => console.log(id)}>
+                {/*img*/}
+              </button>
+            </div>
+          ))}
+      </div>
     )
   }
 
   return (
     <div className='new__current-meal-container'>
-      <h2>Current meal</h2>
+      <div className='current-meal-container__header'>
+        <h2>Current meal</h2>
+        <button 
+          className='header__reset-button' 
+          disabled={props.currentMeal.size < 1}
+          onClick={onReset}
+        >
+          Reset
+        </button>
+      </div>
       <div className='current-meal-container__table'>
         {renderTable()}
       </div>

@@ -278,6 +278,10 @@ Create
     width: 40%;
 }
 
+/*
+Insert
+*/
+
 .new__add-food-label-row {
     display: flex;
     padding-bottom: 5px;
@@ -306,12 +310,31 @@ Create
     margin-top: 20px;
 }
 
+.new__current-meal-container h2 {
+    padding-bottom: 10px;
+}
+
+.current-meal-container__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.header__reset-button {
+    margin-top: 5px;
+    height: 20px;
+}
+
+
 .current-meal-container__table {
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 97%;
+    height: 450px;
     border-style: solid;
     border-width: thin;
-    width: 100%;
-    height: 100%;
-    margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow: scroll;
 }
 
 .table__empty-table {
@@ -326,21 +349,18 @@ Create
 }
 
 .table__table-frame {
-    width: 100%;
-    text-align: left
+    padding-left: 5px;
+    padding-right: 5px;
+    width: 97%;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
 }
 
-.table-frame__column {
-    width: 50%;
-    border-style: solid;
-    border-width: thin;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-}
-
-.table-frame__row {
-
+.table__table-frame #row {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: inherit;
 }
 
 .row__delete-button {
