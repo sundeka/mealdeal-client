@@ -1,15 +1,15 @@
-import { Food } from '../../schema'
+import { MealPiece } from '../../schema'
 
 interface CurrentMealProps {
-  currentMeal: Map<string, Food>
-  setCurrentMeal: React.Dispatch<React.SetStateAction<Map<string, Food>>>
+  currentMeal: Map<string, MealPiece>
+  setCurrentMeal: React.Dispatch<React.SetStateAction<Map<string, MealPiece>>>
   deleteFood: (id: string) => void
 }
 
 const CurrentMeal = (props: CurrentMealProps) => {
   
   const onReset = () => {
-    props.setCurrentMeal(new Map<string, Food>())
+    props.setCurrentMeal(new Map<string, MealPiece>())
   }
 
   const renderTable = () => {

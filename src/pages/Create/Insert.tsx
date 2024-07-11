@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { Food } from '../../schema';
+import { Food, MealPiece } from '../../schema';
 
 interface InsertProps {
-  currentMeal: Map<string, Food>
+  foods: any
+  currentMeal: Map<string, MealPiece>
   addFood: any
 }
 
@@ -42,18 +43,19 @@ const Insert = (props: InsertProps) => {
       <div className='new__add-food'>
         <select onChange={onChangeFood} id='food-name'>
           <option value="">Select a food</option>
-          <option 
-            data-id="59effe0f-865b-4718-b373-c6b697d3a9cd"
-            value="Jauheliha"
-          >
-            Jauheliha
-          </option>
-          <option 
-            data-id="d72e9f29-b64d-4be5-9712-688d599d731d"
-            value="Riisi (Täysjyvä)"
-          >
-            Riisi (Täysjyvä)
-          </option>
+          {
+            props.foods.map((food: Food) => {
+              return (
+                <option
+                  key={food.id}
+                  data-id={food.food_id}
+                  value={food.name}
+                >
+                  {food.name}
+                </option>
+              )
+            })
+          }
         </select>
         <input onChange={onChangeGrams} id='food-amount' type='number'></input>
         <button 

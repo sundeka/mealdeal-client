@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { Food } from '../../schema'
+import { MealPiece } from '../../schema'
 
 interface MetadataProps {
-  currentMeal: Map<string, Food>
+  currentMeal: Map<string, MealPiece>
 }
 
 const Metadata = (props: MetadataProps) => {
