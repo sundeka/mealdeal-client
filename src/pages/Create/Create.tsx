@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { MealPiece } from '../../schema'
+import { useEffect, useState } from 'react'
+import { Meal, NutritionFact } from '../../schema'
 import Header from "../../components/Header/Header"
 import Insert from './Insert'
 import CurrentMeal from './CurrentMeal'
@@ -7,22 +7,39 @@ import Metadata from './Metadata'
 import MealContent from './MealContent'
 import { getFoods } from './../../api/endpoints'
 import { useQuery } from "react-query";
+import { calculateNutrition } from '../../utils/calculateNutrition'
+
+const nutritionInit: NutritionFact = {
+  calories: 0,
+  fat: 0,
+  fat_saturated: 0,
+  carbs: 0,
+  carbs_sugar: 0,
+  fibers: 0,
+  protein: 0,
+  salt: 0
+}
 
 const Create = () => {
-  const [currentMeal, setCurrentMeal] = useState<Map<string, MealPiece>>(new Map<string, MealPiece>());
+  const [currentMeal, setCurrentMeal] = useState<Map<string, Meal>>(new Map<string, Meal>());
+  const [currentNutrition, setCurrentNutrition] = useState<NutritionFact>(nutritionInit);
+  const { data: foods, isError: foodsIsError, isLoading: foodsIsLoading } = useQuery("getFoods", getFoods);
 
-  const {
-    data: foods,
-    isError: foodsIsError,
-    isLoading: foodsIsLoading,
-  } = useQuery("getFoods", getFoods);
-
+  useEffect(() => {
+    if (foods) {
+      setCurrentNutrition(calculateNutrition(foods, currentMeal))
+    }
+    if (currentMeal.size == 0) {
+      setCurrentNutrition(nutritionInit)
+    }
+  }, [currentMeal])
+  
   const addFood = (food_id: string, name: string, amount: number) => {
-    const payload: MealPiece = { food_id, name, amount };
+    const payload: Meal = { food_id, name, amount };
     if (currentMeal.has(food_id)) {
       alert('Adding the same food more than once is not allowed!')
     } else {
-      setCurrentMeal((prevMeal: Map<string, MealPiece>) => {
+      setCurrentMeal((prevMeal: Map<string, Meal>) => {
         const newMeal = new Map(prevMeal);
         newMeal.set(food_id, payload);
         return newMeal;
@@ -31,7 +48,7 @@ const Create = () => {
   }
 
   const deleteFood = (id: string) => {
-    setCurrentMeal((prevMeal: Map<string, MealPiece>) => {
+    setCurrentMeal((prevMeal: Map<string, Meal>) => {
       const newMeal = new Map(prevMeal);
       newMeal.delete(id)
       return newMeal;
@@ -74,7 +91,7 @@ const Create = () => {
       <div className='create-root'>
         {renderMealFrame()}
         <div id='lane' className='create-root__meal-content'>
-          <MealContent />
+          <MealContent nutrition={currentNutrition} />
         </div>
         <div id='lane' className='create-root__metadata'>
           <Metadata currentMeal={currentMeal}/>

@@ -13,7 +13,7 @@ export type Food = {
 /**
  * Represents a single entry in the 'Current meal' table
  */
-export type MealPiece = {
+export type Meal = {
   food_id: string
   name: string
   amount: number
@@ -22,6 +22,13 @@ export type MealPiece = {
 /**
  * 
  */
-export type Meal = {
-
+export type NutritionFact = {
+  calories: number
+  fat: number
+  fat_saturated: number
+  carbs: number
+  carbs_sugar: number
+  fibers: number
+  protein: number
+  salt: number
 }
