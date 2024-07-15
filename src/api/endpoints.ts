@@ -8,3 +8,10 @@ export const getFoods = async () => {
   );
   return response.data;
 };
+
+export const getFoodTypes = async () => {
+  const response = await axios.get(
+    DEV_BACKEND + "/types"
+  );
+  return response.data;
+}

@@ -25,6 +25,22 @@ button {
     background-color: rgb(200, 191, 231)
 }
 
+.lane-loading-container {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.lane-loading-container__loading-icon {
+    border-style: solid;
+    border-width: thin;
+    width: 80px;
+    height: 80px;
+}
+
 /* 
 Login
 */
@@ -278,22 +294,6 @@ Create
     width: 40%;
 }
 
-.new__api-wrapper {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 30px;
-}
-
-.api-wrapper__loading-icon {
-    border-style: solid;
-    border-width: thin;
-    width: 80px;
-    height: 80px;
-}
-
 /*
 Insert
 */
@@ -469,6 +469,12 @@ Metadata
     border-right: 0;
 }
 
+.create-root__metadata #unsuccesful {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
 
 .create-root__metadata #info {
     height: 70%;

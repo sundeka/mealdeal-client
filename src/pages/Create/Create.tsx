@@ -59,8 +59,8 @@ const Create = () => {
     if (foodsIsLoading) {
       return (
         <div id='lane' className='create-root__new'>
-          <div className='new__api-wrapper'>
-            <div className='api-wrapper__loading-icon'>
+          <div className='lane-loading-container'>
+            <div className='lane-loading-container__loading-icon'>
               {/** TODO: Loading icon */}
             </div>
             <span>Loading...</span>
@@ -70,7 +70,7 @@ const Create = () => {
     } else if (foodsIsError) {
       return (
         <div id='lane' className='create-root__new'>
-          <div className='new__api-wrapper'>
+          <div className='lane-loading-container'>
             <span>Oh no! Something went wrong...</span>
           </div>
         </div>
@@ -94,7 +94,7 @@ const Create = () => {
           <MealContent nutrition={currentNutrition} />
         </div>
         <div id='lane' className='create-root__metadata'>
-          <Metadata currentMeal={currentMeal}/>
+          <Metadata currentMeal={currentMeal} />
         </div>
       </div>
       

@@ -32,3 +32,11 @@ export type NutritionFact = {
   protein: number
   salt: number
 }
+
+/**
+ * Meal types as received from the database
+ */
+export type MealType = {
+  id: number
+  name: string
+}
