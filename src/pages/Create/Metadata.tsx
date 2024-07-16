@@ -1,24 +1,30 @@
 import { useState } from 'react'
-import { Meal, MealType } from '../../schema'
-import { useQuery } from 'react-query'
+import { Meal, MealMetadata, MealType } from '../../schema'
+import { UseMutationResult, useQuery } from 'react-query'
 import { getFoodTypes } from '../../api/endpoints'
+import { AxiosResponse } from 'axios'
+import { serializeCurrentMeal } from '../../utils/serializeCurrentMeal'
+import { v4 as uuidv4 } from 'uuid';
 
 interface MetadataProps {
   currentMeal: Map<string, Meal>
+  mutation: UseMutationResult<AxiosResponse<any, any>, unknown, any, unknown>
 }
 
 const Metadata = (props: MetadataProps) => {
   const [name, setName] = useState<string | null>(null)
-  const [type, setType] = useState<string | null>(null)
-  const [descripion, setDescription] = useState<string | null>(null)
+  const [type, setType] = useState<number | null>(null)
+  const [description, setDescription] = useState<string | null>(null)
   const { data: types, isError: typesIsError, isLoading: typesIsLoading } = useQuery("getFoodTypes", getFoodTypes);
-  
+
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
   }
 
   const onChangeType = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setType(event.target.value)
+    const selectedOption = event.target.selectedOptions[0];
+    const selectedType = selectedOption.getAttribute('data-id')
+    setType(Number(selectedType))
   }
 
   const onChangeDescription = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -26,7 +32,17 @@ const Metadata = (props: MetadataProps) => {
   }
 
   const onCreateMeal = () => {
-    
+    if (props.currentMeal.size > 0 && name && type) {
+      const mealEvents = serializeCurrentMeal(props.currentMeal)
+      const meal: MealMetadata = {
+        mealId: uuidv4(),
+        name: name,
+        description: description,
+        type: type,
+        events: mealEvents
+      }
+      props.mutation.mutate(meal)
+    }
   }
 
   const renderMetadata = () => {
@@ -72,6 +88,7 @@ const Metadata = (props: MetadataProps) => {
                         <option
                           key={mealType.id}
                           value={mealType.name}
+                          data-id={mealType.id}
                         >
                           {mealType.name}
                         </option>

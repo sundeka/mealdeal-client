@@ -1,4 +1,5 @@
 import axios from "axios";
+import { MealMetadata } from "../schema";
 
 const DEV_BACKEND = "http://127.0.0.1:5000"
 
@@ -14,4 +15,11 @@ export const getFoodTypes = async () => {
     DEV_BACKEND + "/types"
   );
   return response.data;
+}
+
+export const postCreateMeal = async (mealData: MealMetadata) => {
+  return await axios.post(
+    DEV_BACKEND + "/create",
+    mealData
+  )
 }

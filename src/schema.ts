@@ -40,3 +40,14 @@ export type MealType = {
   id: number
   name: string
 }
+
+/**
+ * Represents the metadata of a new meal that is being added to the database
+ */
+export type MealMetadata = {
+  mealId: string,
+  name: string,
+  description: string | null,
+  type: number
+  events: Meal[]
+}

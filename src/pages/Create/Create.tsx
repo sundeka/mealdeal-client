@@ -5,8 +5,8 @@ import Insert from './Insert'
 import CurrentMeal from './CurrentMeal'
 import Metadata from './Metadata'
 import MealContent from './MealContent'
-import { getFoods } from './../../api/endpoints'
-import { useQuery } from "react-query";
+import { getFoods, postCreateMeal } from './../../api/endpoints'
+import { useMutation, useQuery } from "react-query";
 import { calculateNutrition } from '../../utils/calculateNutrition'
 
 const nutritionInit: NutritionFact = {
@@ -24,6 +24,11 @@ const Create = () => {
   const [currentMeal, setCurrentMeal] = useState<Map<string, Meal>>(new Map<string, Meal>());
   const [currentNutrition, setCurrentNutrition] = useState<NutritionFact>(nutritionInit);
   const { data: foods, isError: foodsIsError, isLoading: foodsIsLoading } = useQuery("getFoods", getFoods);
+  const createMealEndpoint = useMutation(
+    { 
+      mutationFn: postCreateMeal 
+    }
+  )
 
   useEffect(() => {
     if (foods) {
@@ -94,7 +99,7 @@ const Create = () => {
           <MealContent nutrition={currentNutrition} />
         </div>
         <div id='lane' className='create-root__metadata'>
-          <Metadata currentMeal={currentMeal} />
+          <Metadata currentMeal={currentMeal} mutation={createMealEndpoint} />
         </div>
       </div>
       
