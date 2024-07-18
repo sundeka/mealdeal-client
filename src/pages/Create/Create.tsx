@@ -8,6 +8,7 @@ import MealContent from './MealContent'
 import { getFoods, postCreateMeal } from './../../api/endpoints'
 import { useMutation, useQuery } from "react-query";
 import { calculateNutrition } from '../../utils/calculateNutrition'
+import { MoonLoader } from 'react-spinners'
 
 const nutritionInit: NutritionFact = {
   calories: 0,
@@ -66,7 +67,7 @@ const Create = () => {
         <div id='lane' className='create-root__new'>
           <div className='lane-loading-container'>
             <div className='lane-loading-container__loading-icon'>
-              {/** TODO: Loading icon */}
+              <MoonLoader />
             </div>
             <span>Loading...</span>
           </div>

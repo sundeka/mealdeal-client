@@ -6,6 +6,7 @@ import { AxiosResponse } from 'axios'
 import { serializeCurrentMeal } from '../../utils/serializeCurrentMeal'
 import { v4 as uuidv4 } from 'uuid';
 import toast from 'react-hot-toast'
+import { MoonLoader } from 'react-spinners'
 
 interface MetadataProps {
   currentMeal: Map<string, Meal>
@@ -63,7 +64,7 @@ const Metadata = (props: MetadataProps) => {
         <div id='unsuccessful'>
           <div className='lane-loading-container'>
             <div className='lane-loading-container__loading-icon'>
-              {/** TODO: Loading icon */}
+              <MoonLoader />
             </div>
             <span>Loading...</span>
           </div>
