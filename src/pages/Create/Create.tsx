@@ -23,13 +23,13 @@ const nutritionInit: NutritionFact = {
 const Create = () => {
   const [currentMeal, setCurrentMeal] = useState<Map<string, Meal>>(new Map<string, Meal>());
   const [currentNutrition, setCurrentNutrition] = useState<NutritionFact>(nutritionInit);
-  const { data: foods, isError: foodsIsError, isLoading: foodsIsLoading } = useQuery("getFoods", getFoods);
+  const { data: foods, isError: foodsIsError, isLoading: foodsIsLoading } = useQuery("getFoods", getFoods, { refetchOnWindowFocus: false });
   const createMealEndpoint = useMutation(
     { 
       mutationFn: postCreateMeal 
     }
   )
-
+  
   useEffect(() => {
     if (foods) {
       setCurrentNutrition(calculateNutrition(foods, currentMeal))
@@ -39,14 +39,14 @@ const Create = () => {
     }
   }, [currentMeal])
   
-  const addFood = (food_id: string, name: string, amount: number) => {
-    const payload: Meal = { food_id, name, amount };
-    if (currentMeal.has(food_id)) {
+  const addFood = (foodId: string, name: string, amount: number) => {
+    const payload: Meal = { foodId, name, amount };
+    if (currentMeal.has(foodId)) {
       alert('Adding the same food more than once is not allowed!')
     } else {
       setCurrentMeal((prevMeal: Map<string, Meal>) => {
         const newMeal = new Map(prevMeal);
-        newMeal.set(food_id, payload);
+        newMeal.set(foodId, payload);
         return newMeal;
       });
     }

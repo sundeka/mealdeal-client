@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Meal, MealMetadata, MealType } from '../../schema'
 import { UseMutationResult, useQuery } from 'react-query'
 import { getFoodTypes } from '../../api/endpoints'
 import { AxiosResponse } from 'axios'
 import { serializeCurrentMeal } from '../../utils/serializeCurrentMeal'
 import { v4 as uuidv4 } from 'uuid';
+import toast from 'react-hot-toast'
 
 interface MetadataProps {
   currentMeal: Map<string, Meal>
@@ -15,8 +16,19 @@ const Metadata = (props: MetadataProps) => {
   const [name, setName] = useState<string | null>(null)
   const [type, setType] = useState<number | null>(null)
   const [description, setDescription] = useState<string | null>(null)
-  const { data: types, isError: typesIsError, isLoading: typesIsLoading } = useQuery("getFoodTypes", getFoodTypes);
+  const { data: types, isError: typesIsError, isLoading: typesIsLoading } = useQuery("getFoodTypes", getFoodTypes, { refetchOnWindowFocus: false });
 
+  useEffect(() => {
+    toast.dismiss()
+    if (props.mutation.isError) {
+      toast.error("Error creating a new meal!")
+    } else if (props.mutation.isLoading) {
+      toast.loading("Creating a new meal...")
+    } else if (props.mutation.isSuccess) {
+      toast.success("New meal created!")
+    }
+  }, [props.mutation.isError, props.mutation.isLoading, props.mutation.isSuccess])
+  
   const onChangeName = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value)
   }
@@ -41,7 +53,7 @@ const Metadata = (props: MetadataProps) => {
         type: type,
         events: mealEvents
       }
-      props.mutation.mutate(meal)
+      props.mutation.mutate(meal) 
     }
   }
 
@@ -102,7 +114,9 @@ const Metadata = (props: MetadataProps) => {
           </div>
           <div id='actions'>
             <button 
-              disabled={!(name && type && (props.currentMeal.size > 0))}
+              disabled={
+                !(name && type && (props.currentMeal.size > 0))  || props.mutation.isLoading
+              }
               onClick={onCreateMeal}
             >
               Create meal

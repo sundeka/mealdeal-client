@@ -14,7 +14,7 @@ export type Food = {
  * Represents a single entry in the 'Current meal' table
  */
 export type Meal = {
-  food_id: string
+  foodId: string
   name: string
   amount: number
 }

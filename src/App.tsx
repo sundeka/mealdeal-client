@@ -9,6 +9,7 @@ import Create from './pages/Create/Create';
 import Browse from './pages/Browse';
 import Plans from './pages/Plans';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { Toaster } from 'react-hot-toast';
 
 const queryClient = new QueryClient()
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
+      <Toaster /> 
     </QueryClientProvider>
   );
 }

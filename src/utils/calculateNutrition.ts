@@ -13,7 +13,7 @@ export function calculateNutrition(foods: Food[], meal: Map<string, Meal>): Nutr
   }
 
   for (const mealItem of meal.values()) {
-    const foodProperties = foods.find(item => mealItem.food_id === item.food_id)
+    const foodProperties = foods.find(item => mealItem.foodId === item.food_id)
     if (foodProperties) {
       fact.calories += foodProperties.calories * (mealItem.amount/100);
       ////fact.fat += mealItem.fat;
