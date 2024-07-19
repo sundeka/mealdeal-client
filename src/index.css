@@ -2,6 +2,15 @@
 General
 */
 
+#root {
+    background-color: rgb(239, 228, 176);
+    height: 100vh;
+}
+
+header {
+    background-color: white;
+}
+
 h1 {
     font-size: 2em;
     font-weight: bold;
@@ -66,6 +75,7 @@ Login
 }
 
 .login-root__login-container {
+    background-color: white;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -212,6 +222,7 @@ Home
 }
 
 .home-root__intro-container {
+    background-color: white;
     width: 530px;
     height: 220px;
     padding: 10px;
@@ -277,11 +288,6 @@ Create
     gap: 3vw;
     min-width: 608px;
     min-height: 600px;
-    border-style: dotted;
-    border-width: thin;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
     padding-top: 25px;
     padding-left: 10%;
     padding-right: 10%;
@@ -292,6 +298,7 @@ Create
 }
 
 .create-root #lane {
+    background-color: white;
     width: 100%;
     min-width: 280px;
     border-style: solid;
@@ -583,28 +590,26 @@ Browse
 }
 
 .browser-container {
+    margin-top: 25px;
+    margin-bottom: 25px;
+    background-color: white;
     width: 600px;
     border-style: solid;
     border-width: thin;
-    border-top: 0;
-    border-bottom: 0;
 }
 
 .browse-root--success #container-right--disabled {
     height: 843px;
     width: 0px;
     transition: width 100ms linear;
+    background-color: white;
 }
 
 .browse-root--success #container-right--active {
+    background-color: white;
     height: 843px;
     width: 900px;
     transition: width 100ms linear;
-
-    border-style: solid;
-    border-width: thin;
-    border-top: 0;
-    border-bottom: 0;
 }
 
 .browser-header {
@@ -614,24 +619,11 @@ Browse
     align-items: center;
     justify-content: space-evenly;
     padding-top: 30px;
-    padding-bottom: 35px;
-
-    border-style: dashed;
-    border-width: thin;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
 }
 
 .browser-content {
     height: 610px;
     width: 100%;
-
-    border-style: dashed;
-    border-width: thin;
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
 }
 
 .browser-content__browser-frame {
@@ -670,7 +662,7 @@ Browse
 
 .item_wrapper__title #expand {
     height: 15px;
-    width: 15px;
+    width: 40px;
     border-style: solid;
     border-width: thin;
     margin-inline-end: 15px;

@@ -22,7 +22,7 @@ const Browser = (props: BrowserProps) => {
         Array.from(props.meals.entries()).map(([mealType, meal]) => (
           <div className='browser-frame__item_wrapper'>
             <div className='item_wrapper__title'>
-              <h2 id='text'>{mealType.name}</h2>
+              <h2 id='text'>{mealType.name} ({meal.length})</h2>
               <div id='expand' />
             </div>
             {
