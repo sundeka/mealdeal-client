@@ -17,6 +17,13 @@ export const getFoodTypes = async () => {
   return response.data;
 }
 
+export const getMeals = async () => {
+  const response = await axios.get(
+    DEV_BACKEND + "/meals"
+  );
+  return response.data;
+}
+
 export const postCreateMeal = async (mealData: MealMetadata) => {
   return await axios.post(
     DEV_BACKEND + "/create",

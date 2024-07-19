@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Food, Meal } from '../../schema';
+import { Food, MealItem } from '../../schema';
 
 interface InsertProps {
   foods: any
-  currentMeal: Map<string, Meal>
+  currentMeal: Map<string, MealItem>
   addFood: any
 }
 

@@ -11,15 +11,6 @@ export type Food = {
 }
 
 /**
- * Represents a single entry in the 'Current meal' table
- */
-export type Meal = {
-  foodId: string
-  name: string
-  amount: number
-}
-
-/**
  * 
  */
 export type NutritionFact = {
@@ -31,6 +22,26 @@ export type NutritionFact = {
   fibers: number
   protein: number
   salt: number
+}
+
+/**
+ * Represents a single meal as received from the database table 'meals'
+ */
+export type Meal = {
+  description: string | null
+  meal_id: string
+  name: string
+  type: number
+}
+
+
+/**
+ * Represents a single entry in the 'Current meal' table
+ */
+export type MealItem = {
+  foodId: string
+  name: string
+  amount: number
 }
 
 /**
@@ -49,5 +60,5 @@ export type MealMetadata = {
   name: string,
   description: string | null,
   type: number
-  events: Meal[]
+  events: MealItem[]
 }

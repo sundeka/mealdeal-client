@@ -590,7 +590,7 @@ Browse
     border-bottom: 0;
 }
 
-.browse-root--success #container-right {
+.browse-root--success #container-right--disabled {
     height: 843px;
     width: 0px;
     transition: width 100ms linear;
@@ -605,4 +605,103 @@ Browse
     border-width: thin;
     border-top: 0;
     border-bottom: 0;
+}
+
+.browser-header {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding-top: 30px;
+    padding-bottom: 35px;
+
+    border-style: dashed;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.browser-content {
+    height: 610px;
+    width: 100%;
+
+    border-style: dashed;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.browser-content__browser-frame {
+    border-style: solid;
+    border-width: thin;
+    height: 580px;
+    margin: 30px;
+}
+
+.browser-frame__item_wrapper {
+    display: flex;
+    flex-direction: column;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.item_wrapper__title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.item_wrapper__title #text {
+    margin-inline: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.item_wrapper__title #expand {
+    height: 15px;
+    width: 15px;
+    border-style: solid;
+    border-width: thin;
+    margin-inline-end: 15px;
+    background-color: rgb(200, 191, 231);;
+}
+
+.item_wrapper__row {
+    border-style: solid;
+    border-width: thin;
+    height: 35px;
+    margin-inline: 20px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.item_wrapper__row--selected {
+    background-color: rgb(200, 191, 231);
+    border-style: solid;
+    border-width: thin;
+    height: 35px;
+    margin-inline: 20px;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.item_wrapper__row #text, .item_wrapper__row--selected #text  {
+    margin-inline: 10px;
+}
+
+.browser-frame__item_wrapper #end-padding {
+    height: 15px;
 }

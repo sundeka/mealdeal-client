@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Meal, NutritionFact } from '../../schema'
+import { MealItem, NutritionFact } from '../../schema'
 import Header from "../../components/Header/Header"
 import Insert from './Insert'
 import CurrentMeal from './CurrentMeal'
@@ -22,7 +22,7 @@ const nutritionInit: NutritionFact = {
 }
 
 const Create = () => {
-  const [currentMeal, setCurrentMeal] = useState<Map<string, Meal>>(new Map<string, Meal>());
+  const [currentMeal, setCurrentMeal] = useState<Map<string, MealItem>>(new Map<string, MealItem>());
   const [currentNutrition, setCurrentNutrition] = useState<NutritionFact>(nutritionInit);
   const { data: foods, isError: foodsIsError, isLoading: foodsIsLoading } = useQuery("getFoods", getFoods, { refetchOnWindowFocus: false });
   const createMealEndpoint = useMutation(
@@ -41,11 +41,11 @@ const Create = () => {
   }, [currentMeal])
   
   const addFood = (foodId: string, name: string, amount: number) => {
-    const payload: Meal = { foodId, name, amount };
+    const payload: MealItem = { foodId, name, amount };
     if (currentMeal.has(foodId)) {
       alert('Adding the same food more than once is not allowed!')
     } else {
-      setCurrentMeal((prevMeal: Map<string, Meal>) => {
+      setCurrentMeal((prevMeal: Map<string, MealItem>) => {
         const newMeal = new Map(prevMeal);
         newMeal.set(foodId, payload);
         return newMeal;
@@ -54,7 +54,7 @@ const Create = () => {
   }
 
   const deleteFood = (id: string) => {
-    setCurrentMeal((prevMeal: Map<string, Meal>) => {
+    setCurrentMeal((prevMeal: Map<string, MealItem>) => {
       const newMeal = new Map(prevMeal);
       newMeal.delete(id)
       return newMeal;

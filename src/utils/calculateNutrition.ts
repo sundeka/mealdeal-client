@@ -1,6 +1,6 @@
-import { Food, Meal, NutritionFact } from "../schema";
+import { Food, MealItem, NutritionFact } from "../schema";
 
-export function calculateNutrition(foods: Food[], meal: Map<string, Meal>): NutritionFact {
+export function calculateNutrition(foods: Food[], meal: Map<string, MealItem>): NutritionFact {
   var fact: NutritionFact = {
     calories: 0,
     fat: 0,

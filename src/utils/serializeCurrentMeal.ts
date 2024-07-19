@@ -3,10 +3,10 @@
  * a form that can be transferred via HTTP
  */
 
-import { Meal } from "../schema";
+import { MealItem } from "../schema";
 
-export function serializeCurrentMeal(currentMeal: Map<string, Meal>) {
-  var meals: Meal[] = []
+export function serializeCurrentMeal(currentMeal: Map<string, MealItem>) {
+  var meals: MealItem[] = []
   for (const meal of currentMeal.values()) {
     meals.push(meal)
   }

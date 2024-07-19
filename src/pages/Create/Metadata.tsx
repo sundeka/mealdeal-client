@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Meal, MealMetadata, MealType } from '../../schema'
+import { MealItem, MealMetadata, MealType } from '../../schema'
 import { UseMutationResult, useQuery } from 'react-query'
 import { getFoodTypes } from '../../api/endpoints'
 import { AxiosResponse } from 'axios'
@@ -9,7 +9,7 @@ import toast from 'react-hot-toast'
 import { MoonLoader } from 'react-spinners'
 
 interface MetadataProps {
-  currentMeal: Map<string, Meal>
+  currentMeal: Map<string, MealItem>
   mutation: UseMutationResult<AxiosResponse<any, any>, unknown, any, unknown>
 }
 
