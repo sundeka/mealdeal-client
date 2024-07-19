@@ -4,8 +4,8 @@ import BrowseContentPage from "./BrowseContentPage";
 import BrowseLoadingPage from "./BrowseLoadingPage";
 
 const Browse = () => {
-  const isSuccess = false;
-  const isLoading = true;
+  const isSuccess = true;
+  const isLoading = false;
 
   const renderPage = () => {
     if (isSuccess) {
