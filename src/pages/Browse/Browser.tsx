@@ -2,17 +2,17 @@ import { Meal, MealType } from "../../schema"
 
 interface BrowserProps {
   meals: Map<MealType, Meal[]>
-  selectedRow: string | null
-  setSelectedRow: React.Dispatch<React.SetStateAction<string | null>>
+  selectedRow: Meal | null
+  setSelectedRow: React.Dispatch<React.SetStateAction<Meal | null>>
 }
 
 const Browser = (props: BrowserProps) => {
   
-  const onClickRow = (id: string) => {
-    if (id == props.selectedRow) {
+  const onClickRow = (meal: Meal) => {
+    if (meal.meal_id == props.selectedRow?.meal_id) {
       props.setSelectedRow(null)
     } else {
-      props.setSelectedRow(id)
+      props.setSelectedRow(meal)
     }
   }
   
@@ -28,9 +28,9 @@ const Browser = (props: BrowserProps) => {
             {
               meal.map((meal) => (
                 <div 
-                  className={`${props.selectedRow == meal.meal_id ? 'item_wrapper__row--selected' : 'item_wrapper__row'}`} 
+                  className={`${props.selectedRow?.meal_id == meal.meal_id ? 'item_wrapper__row--selected' : 'item_wrapper__row'}`} 
                   id={meal.meal_id} 
-                  onClick={() => onClickRow(meal.meal_id)}
+                  onClick={() => onClickRow(meal)}
                 >
                   <span id='text' key={meal.meal_id}>{meal.name}</span>
                 </div>     

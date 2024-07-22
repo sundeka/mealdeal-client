@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Meal, MealType } from "../../schema";
 import { sortMeals } from "../../utils/sortMeals";
 import Browser from "./Browser";
+import BrowserInfoPanel from "./BrowserInfoPanel";
 
 interface BrowseContentPageProps {
   meals: Meal[]
@@ -9,7 +10,7 @@ interface BrowseContentPageProps {
 }
 
 const BrowseContentPage = (props: BrowseContentPageProps) => {
-  const [selectedRow, setSelectedRow] = useState<string | null>(null);
+  const [currentSelection, setCurrentSelection] = useState<Meal | null>(null);
   const [sortedMeals, setSortedMeals] = useState<Map<MealType, Meal[]>>(sortMeals(props.types, props.meals));
   
   return (
@@ -21,13 +22,11 @@ const BrowseContentPage = (props: BrowseContentPageProps) => {
             <span>Found {props.meals.length} meals for *username*</span>
           </div>
           <div className='browser-content'>
-            <Browser meals={sortedMeals} selectedRow={selectedRow} setSelectedRow={setSelectedRow}/>
+            <Browser meals={sortedMeals} selectedRow={currentSelection} setSelectedRow={setCurrentSelection}/>
           </div>
         </div>
       </div>
-      <div id={`${selectedRow ? 'container-right--active' : 'container-right--disabled'}`}>
-          
-      </div>
+      <BrowserInfoPanel meal={currentSelection} types={props.types} setCurrentSelection={setCurrentSelection}/>
     </div>
   )
 }
