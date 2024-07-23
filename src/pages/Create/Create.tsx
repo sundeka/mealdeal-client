@@ -32,6 +32,7 @@ const Create = () => {
   )
   
   useEffect(() => {
+    console.log(currentMeal)
     if (foods) {
       setCurrentNutrition(calculateNutrition(foods, currentMeal))
     }

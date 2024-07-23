@@ -1,6 +1,10 @@
 import { MoonLoader } from "react-spinners";
-import { Meal, MealType } from "../../schema"
+import { Meal, MealItem, MealType } from "../../schema"
 import { getTypeNameForMealId } from "../../utils/getTypeNameForMealId";
+import { useQuery } from "react-query";
+import { getMealContents } from "../../api/endpoints";
+import { useEffect, useState } from "react";
+import MealTable from "../../components/MealTable/MealTable";
 
 interface BrowserInfoPanelProps {
   meal: Meal | null
@@ -9,15 +13,30 @@ interface BrowserInfoPanelProps {
 }
 
 const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
+  const { 
+    data: mealContents, 
+    isLoading: mealContentsIsLoading,
+    isError: mealContentsIsError
+  } = useQuery(
+    ["getMealContents", props.meal?.meal_id],  
+    () => getMealContents(props.meal?.meal_id), 
+    { refetchOnWindowFocus: false }
+  );
+  const initialMeal = mealContents
+  const [currentMeal, setCurrentMeal] = useState<Map<string, MealItem> | undefined>(initialMeal)
+  
+  useEffect(() => {
+    setCurrentMeal(mealContents)
+  }, [mealContents])
+  
   if (!props.meal) {
     return (
       <div id='container-right--disabled' />
     )
   }
-  const isLoading = true
-  const isError = false
+
   const mealTypeName = getTypeNameForMealId(props.meal.type, props.types)
-  
+
   const loadingScreen = () => {
     return (
       <div id='loading'>
@@ -25,6 +44,18 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
         <span>Loading...</span>
       </div>
     )
+  }
+
+  const renderContent = () => {
+    if (mealContentsIsError) {
+      return (
+        <span>Error!</span>
+      )
+    } else if (currentMeal) {
+      return (
+        <MealTable currentMeal={currentMeal} deleteFood={() => {}}/>
+      )
+    }
   }
   
   return (
@@ -39,11 +70,11 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
         </div>
       </div>
       <div className='container-right__content'>
-        {isLoading ? loadingScreen() : <p>done</p>}
+        {mealContentsIsLoading ? loadingScreen() : renderContent()}
       </div>
       <div className='container-right__actions'>
-        <button disabled={isError || isLoading} id='delete' />
-        <button disabled={isError || isLoading} id='save'>Save changes</button>
+        <button disabled={mealContentsIsLoading || mealContentsIsError} id='delete' />
+        <button disabled={mealContentsIsLoading || mealContentsIsError} id='save'>Save changes</button>
       </div>
     </div>
   )

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MealMetadata } from "../schema";
+import { MealItem, MealMetadata } from "../schema";
 
 const DEV_BACKEND = "http://127.0.0.1:5000"
 
@@ -29,4 +29,20 @@ export const postCreateMeal = async (mealData: MealMetadata) => {
     DEV_BACKEND + "/create",
     mealData
   )
+}
+
+export const getMealContents = async (mealId: string | undefined) => {
+  if (mealId) {
+    const response = await axios.get(
+      DEV_BACKEND + "/events/meals/" + mealId
+    )
+    if (response.data) {
+      const contents = new Map<string, MealItem>()
+      for (const food in response.data) {
+        const mealItem: MealItem = response.data[food]
+        contents.set(mealItem.foodId, mealItem)
+      }
+      return contents
+    }
+  }
 }
