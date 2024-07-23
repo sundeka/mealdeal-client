@@ -736,10 +736,7 @@ Browse
     border-top: 0;
     border-left: 0;
     border-right: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    overflow-y: scroll;
 }
 
 .container-right__actions {
@@ -808,4 +805,29 @@ Browse
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
+}
+
+.content__table-wrapper {
+    min-height: 300px;
+    max-height: 300px;
+    width: 97%;
+    margin: 10px;
+    border-style: solid;
+    border-width: thin;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+}
+
+.content__table-wrapper #header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 5px;
+}
+
+.content__nutrition-wrapper {
+    margin: 10px;
+    width: 97%;
+    height: 600px;
 }

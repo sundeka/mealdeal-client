@@ -53,7 +53,19 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
       )
     } else if (currentMeal) {
       return (
-        <MealTable currentMeal={currentMeal} deleteFood={() => {}}/>
+        <>
+          <div className='content__table-wrapper'>
+            <div id='header'>
+              <h2>Meal contents</h2>
+              <button>Add food</button>
+            </div>
+            <MealTable currentMeal={currentMeal} deleteFood={() => {}}/>
+          </div>
+          <div className='content__nutrition-wrapper'>
+            <h2>Nutritional facts</h2>
+          </div>
+        </>
+        
       )
     }
   }
@@ -74,7 +86,7 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
       </div>
       <div className='container-right__actions'>
         <button disabled={mealContentsIsLoading || mealContentsIsError} id='delete' />
-        <button disabled={mealContentsIsLoading || mealContentsIsError} id='save'>Save changes</button>
+        <button disabled={(initialMeal == currentMeal) || mealContentsIsLoading || mealContentsIsError} id='save'>Save changes</button>
       </div>
     </div>
   )
