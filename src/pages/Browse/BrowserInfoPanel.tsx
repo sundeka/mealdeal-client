@@ -99,7 +99,16 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
       </div>
       <div className='container-right__actions'>
         <button disabled={mealContentsIsLoading || mealContentsIsError} id='delete' />
-        <button disabled={(initialMeal == currentMeal) || mealContentsIsLoading || mealContentsIsError} id='save'>Save changes</button>
+        <button 
+          disabled={
+              (initialMeal == currentMeal) ||
+              mealContentsIsLoading || 
+              mealContentsIsError ||
+              currentMeal?.size == 0
+            }
+          id='save'>
+            Save changes
+        </button>
       </div>
     </div>
   )
