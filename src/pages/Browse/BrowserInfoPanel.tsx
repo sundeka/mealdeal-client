@@ -1,12 +1,10 @@
-import { MoonLoader } from "react-spinners";
 import { Food, Meal, MealItem, MealType, NutritionFact } from "../../schema"
 import { getTypeNameForMealId } from "../../utils/getTypeNameForMealId";
 import { useQuery } from "react-query";
 import { getMealContents } from "../../api/endpoints";
 import { useEffect, useState } from "react";
-import MealTable from "../../components/MealTable/MealTable";
-import NutritionalFacts from "../../components/NutritionalFacts/NutritionalFacts";
 import { calculateNutrition } from "../../utils/calculateNutrition";
+import InfoPanelContent from "./InfoPanelContent";
 
 interface BrowserInfoPanelProps {
   meal: Meal | null
@@ -48,40 +46,6 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
   }
 
   const mealTypeName = getTypeNameForMealId(props.meal.type, props.types)
-
-  const loadingScreen = () => {
-    return (
-      <div id='loading'>
-        <MoonLoader />
-        <span>Loading...</span>
-      </div>
-    )
-  }
-
-  const renderContent = () => {
-    if (mealContentsIsError) {
-      return (
-        <span>Error!</span>
-      )
-    } else if (currentMeal) {
-      return (
-        <>
-          <div className='content__table-wrapper'>
-            <div id='header'>
-              <h2>Meal contents</h2>
-              <button>Add food</button>
-            </div>
-            <MealTable currentMeal={currentMeal} deleteFood={() => {}}/>
-          </div>
-          <div className='content__nutrition-wrapper'>
-            <h2>Nutritional facts</h2>
-            <NutritionalFacts nutrition={nutritionalFacts}/>
-          </div>
-        </>
-        
-      )
-    }
-  }
   
   return (
     <div id='container-right--active'>
@@ -95,7 +59,11 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
         </div>
       </div>
       <div className='container-right__content'>
-        {mealContentsIsLoading ? loadingScreen() : renderContent()}
+        <InfoPanelContent 
+          isLoading={mealContentsIsLoading} 
+          currentMeal={currentMeal}
+          nutritionalFacts={nutritionalFacts}
+        />
       </div>
       <div className='container-right__actions'>
         <button disabled={mealContentsIsLoading || mealContentsIsError} id='delete' />
