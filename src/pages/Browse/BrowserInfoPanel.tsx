@@ -1,34 +1,46 @@
 import { MoonLoader } from "react-spinners";
-import { Meal, MealItem, MealType } from "../../schema"
+import { Food, Meal, MealItem, MealType, NutritionFact } from "../../schema"
 import { getTypeNameForMealId } from "../../utils/getTypeNameForMealId";
 import { useQuery } from "react-query";
 import { getMealContents } from "../../api/endpoints";
 import { useEffect, useState } from "react";
 import MealTable from "../../components/MealTable/MealTable";
+import NutritionalFacts from "../../components/NutritionalFacts/NutritionalFacts";
+import { calculateNutrition } from "../../utils/calculateNutrition";
 
 interface BrowserInfoPanelProps {
   meal: Meal | null
   types: MealType[]
+  foods: Food[]
   setCurrentSelection: React.Dispatch<React.SetStateAction<Meal | null>>
 }
 
 const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
-  const { 
-    data: mealContents, 
-    isLoading: mealContentsIsLoading,
-    isError: mealContentsIsError
+  const { data: mealContents, isLoading: mealContentsIsLoading, isError: mealContentsIsError
   } = useQuery(
     ["getMealContents", props.meal?.meal_id],  
     () => getMealContents(props.meal?.meal_id), 
     { refetchOnWindowFocus: false }
   );
+
+  // 'initialMeal' is meant to be an immutable object used for comparing the initial settings with possible changes to the meal
   const initialMeal = mealContents
+
+  // 'currentMeal' contains the current contents of the meal, which may have more or less foods in them
   const [currentMeal, setCurrentMeal] = useState<Map<string, MealItem> | undefined>(initialMeal)
-  
+  const [nutritionalFacts, setNutritionalFacts] = useState<NutritionFact>(calculateNutrition(props.foods, currentMeal))
+
+  // Refresh 'currentMeal' whenever a new meal is clicked in the browser
   useEffect(() => {
     setCurrentMeal(mealContents)
   }, [mealContents])
+
+  // Update nutritional content whenever a) new foods are added/removed or b) whenever a new meal is selected in the browser
+  useEffect(() => {
+    setNutritionalFacts(calculateNutrition(props.foods, currentMeal))
+  }, [currentMeal, mealContents])
   
+  // Hide the info panel if no meal is selected
   if (!props.meal) {
     return (
       <div id='container-right--disabled' />
@@ -63,6 +75,7 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
           </div>
           <div className='content__nutrition-wrapper'>
             <h2>Nutritional facts</h2>
+            <NutritionalFacts nutrition={nutritionalFacts}/>
           </div>
         </>
         

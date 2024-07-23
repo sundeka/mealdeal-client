@@ -831,3 +831,8 @@ Browse
     width: 97%;
     height: 600px;
 }
+
+.content__nutrition-wrapper h2 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}

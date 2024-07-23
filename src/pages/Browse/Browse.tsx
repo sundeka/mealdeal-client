@@ -3,7 +3,7 @@ import Header from "../../components/Header/Header"
 import NotFound from "../NotFound";
 import BrowseContentPage from "./BrowseContentPage";
 import BrowseLoadingPage from "./BrowseLoadingPage";
-import { getFoodTypes, getMeals } from "../../api/endpoints";
+import { getFoods, getFoodTypes, getMeals } from "../../api/endpoints";
 
 const Browse = () => {
   const isSuccess = true;
@@ -11,11 +11,12 @@ const Browse = () => {
 
   const { data: meals, isLoading: mealsIsLoading } = useQuery("getMeals", getMeals, { refetchOnWindowFocus: false });
   const { data: types, isLoading: typesIsLoading } = useQuery("getFoodTypes", getFoodTypes, { refetchOnWindowFocus: false });
+  const { data: foods, isLoading: foodsIsLoading } = useQuery("getFoods", getFoods, { refetchOnWindowFocus: false } )
 
   const renderPage = () => {
-    if (meals && types) {
-      return <BrowseContentPage meals={meals} types={types} />
-    } else if (mealsIsLoading || typesIsLoading) {
+    if (meals && types && foods) {
+      return <BrowseContentPage meals={meals} types={types} foods={foods}/>
+    } else if (mealsIsLoading || typesIsLoading || foodsIsLoading) {
       return <BrowseLoadingPage />
     } else {
       return <NotFound />

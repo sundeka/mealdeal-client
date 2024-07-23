@@ -4,11 +4,11 @@ import Header from "../../components/Header/Header"
 import Insert from './Insert'
 import CurrentMeal from './CurrentMeal'
 import Metadata from './Metadata'
-import MealContent from './MealContent'
 import { getFoods, postCreateMeal } from './../../api/endpoints'
 import { useMutation, useQuery } from "react-query";
 import { calculateNutrition } from '../../utils/calculateNutrition'
 import { MoonLoader } from 'react-spinners'
+import NutritionalFacts from '../../components/NutritionalFacts/NutritionalFacts'
 
 const nutritionInit: NutritionFact = {
   calories: 0,
@@ -98,7 +98,13 @@ const Create = () => {
       <div className='create-root'>
         {renderMealFrame()}
         <div id='lane' className='create-root__meal-content'>
-          <MealContent nutrition={currentNutrition} />
+          <h1 id='lane-title'>Nutritional facts</h1>
+          <div className='meal-content__table-wrapper'>
+            <span className='table-wrapper__disclaimer'>
+              The following values are an approximation of the meal's entire dietary content.
+            </span>
+            <NutritionalFacts nutrition={currentNutrition} />
+          </div>
         </div>
         <div id='lane' className='create-root__metadata'>
           <Metadata currentMeal={currentMeal} mutation={createMealEndpoint} />

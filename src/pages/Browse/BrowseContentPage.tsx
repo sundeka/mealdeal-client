@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Meal, MealType } from "../../schema";
+import { Food, Meal, MealType } from "../../schema";
 import { sortMeals } from "../../utils/sortMeals";
 import Browser from "./Browser";
 import BrowserInfoPanel from "./BrowserInfoPanel";
@@ -7,6 +7,7 @@ import BrowserInfoPanel from "./BrowserInfoPanel";
 interface BrowseContentPageProps {
   meals: Meal[]
   types: MealType[]
+  foods: Food[]
 }
 
 const BrowseContentPage = (props: BrowseContentPageProps) => {
@@ -26,7 +27,7 @@ const BrowseContentPage = (props: BrowseContentPageProps) => {
           </div>
         </div>
       </div>
-      <BrowserInfoPanel meal={currentSelection} types={props.types} setCurrentSelection={setCurrentSelection}/>
+      <BrowserInfoPanel meal={currentSelection} types={props.types} foods={props.foods} setCurrentSelection={setCurrentSelection}/>
     </div>
   )
 }
