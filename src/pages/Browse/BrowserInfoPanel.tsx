@@ -13,6 +13,7 @@ interface BrowserInfoPanelProps {
   types: MealType[]
   foods: Food[]
   setCurrentSelection: React.Dispatch<React.SetStateAction<Meal | null>>
+  refreshMealList: () => void
 }
 
 const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
@@ -27,6 +28,7 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
     mutationFn: deleteMeal,
     onSuccess: () => {
       setModalIsActive(false)
+      props.refreshMealList()
     }
   })
 

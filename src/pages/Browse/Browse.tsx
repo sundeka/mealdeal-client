@@ -6,16 +6,24 @@ import BrowseLoadingPage from "./BrowseLoadingPage";
 import { getFoods, getFoodTypes, getMeals } from "../../api/endpoints";
 
 const Browse = () => {
-  const isSuccess = true;
-  const isLoading = false;
+  const { data: meals, isLoading: mealsIsLoading, refetch: refetchMeals } = useQuery("getMeals", getMeals, { refetchOnWindowFocus: false });
+  const { data: types, isLoading: typesIsLoading, refetch: refetchTypes } = useQuery("getFoodTypes", getFoodTypes, { refetchOnWindowFocus: false });
+  const { data: foods, isLoading: foodsIsLoading, refetch: refetchFoods } = useQuery("getFoods", getFoods, { refetchOnWindowFocus: false } )
 
-  const { data: meals, isLoading: mealsIsLoading } = useQuery("getMeals", getMeals, { refetchOnWindowFocus: false });
-  const { data: types, isLoading: typesIsLoading } = useQuery("getFoodTypes", getFoodTypes, { refetchOnWindowFocus: false });
-  const { data: foods, isLoading: foodsIsLoading } = useQuery("getFoods", getFoods, { refetchOnWindowFocus: false } )
-
+  const refresh = () => {
+    refetchMeals()
+    refetchTypes()
+    refetchFoods()
+  }
+  
   const renderPage = () => {
     if (meals && types && foods) {
-      return <BrowseContentPage meals={meals} types={types} foods={foods}/>
+      return <BrowseContentPage 
+        meals={meals} 
+        types={types} 
+        foods={foods}
+        onRefresh={refresh}
+      />
     } else if (mealsIsLoading || typesIsLoading || foodsIsLoading) {
       return <BrowseLoadingPage />
     } else {

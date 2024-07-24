@@ -8,11 +8,12 @@ interface BrowseContentPageProps {
   meals: Meal[]
   types: MealType[]
   foods: Food[]
+  onRefresh: () => void
 }
 
 const BrowseContentPage = (props: BrowseContentPageProps) => {
   const [currentSelection, setCurrentSelection] = useState<Meal | null>(null);
-  const [sortedMeals, setSortedMeals] = useState<Map<MealType, Meal[]>>(sortMeals(props.types, props.meals));
+  const sortedMeals: Map<MealType, Meal[]> = sortMeals(props.types, props.meals);
   
   return (
     <div className='browse-root--success'>
@@ -27,7 +28,13 @@ const BrowseContentPage = (props: BrowseContentPageProps) => {
           </div>
         </div>
       </div>
-      <BrowserInfoPanel meal={currentSelection} types={props.types} foods={props.foods} setCurrentSelection={setCurrentSelection}/>
+      <BrowserInfoPanel 
+        meal={currentSelection} 
+        types={props.types} 
+        foods={props.foods} 
+        setCurrentSelection={setCurrentSelection}
+        refreshMealList={props.onRefresh}
+      />
     </div>
   )
 }
