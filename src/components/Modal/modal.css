@@ -1,0 +1,8 @@
+.modal-background {
+    position: absolute;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -404,6 +404,7 @@ Insert
 
 .row__delete-button {
     height: 17px;
+    background-color: red;
 }
 
 /*
@@ -849,4 +850,33 @@ Browse
 .content__nutrition-wrapper h2 {
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+/*
+'Delete meal' disclaimer pop-up
+*/
+
+.delete-meal-popup #root {
+    width: 200px;
+    height: 200px;
+    background-color: cornsilk;
+    border-style: solid;
+    border-width: medium;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.delete-meal-popup #actions {
+    width: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.delete-meal-popup span {
+    font-style: italic;
+    overflow-wrap: anywhere;
+    text-align: center;
 }

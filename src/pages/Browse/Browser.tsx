@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Meal, MealType } from "../../schema"
 import { initBrowserButtonStates } from "../../utils/initBrowserButtonStates"
 
@@ -9,7 +9,6 @@ interface BrowserProps {
 }
 
 const Browser = (props: BrowserProps) => {
-  //const [isExpanded, setIsExpanded] = useState<boolean>(false)
   const [buttonStates, setButtonStates] = useState<Map<string, boolean>>(initBrowserButtonStates(props.meals.keys()))
   
   const onClickRow = (meal: Meal) => {

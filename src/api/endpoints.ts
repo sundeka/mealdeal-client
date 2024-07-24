@@ -46,3 +46,9 @@ export const getMealContents = async (mealId: string | undefined) => {
     }
   }
 }
+
+export const deleteMeal = async (mealId: string) => {
+  return await axios.delete(
+    DEV_BACKEND + "/delete/meal/" + mealId
+  )
+}

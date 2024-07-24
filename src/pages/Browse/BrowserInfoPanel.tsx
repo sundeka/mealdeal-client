@@ -1,10 +1,12 @@
 import { Food, Meal, MealItem, MealType, NutritionFact } from "../../schema"
 import { getTypeNameForMealId } from "../../utils/getTypeNameForMealId";
-import { useQuery } from "react-query";
-import { getMealContents } from "../../api/endpoints";
+import { useMutation, useQuery } from "react-query";
+import { deleteMeal, getMealContents } from "../../api/endpoints";
 import { useEffect, useState } from "react";
 import { calculateNutrition } from "../../utils/calculateNutrition";
 import InfoPanelContent from "./InfoPanelContent";
+import Modal from "../../components/Modal/Modal";
+import DeleteMealDisclaimer from "./DeleteMealDisclaimer";
 
 interface BrowserInfoPanelProps {
   meal: Meal | null
@@ -14,12 +16,19 @@ interface BrowserInfoPanelProps {
 }
 
 const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
+  const [modalIsActive, setModalIsActive] = useState<boolean>(false)
   const { data: mealContents, isLoading: mealContentsIsLoading, isError: mealContentsIsError
   } = useQuery(
     ["getMealContents", props.meal?.meal_id],  
     () => getMealContents(props.meal?.meal_id), 
     { refetchOnWindowFocus: false }
   );
+  const deleteMealEndpoint = useMutation({ 
+    mutationFn: deleteMeal,
+    onSuccess: () => {
+      setModalIsActive(false)
+    }
+  })
 
   // 'initialMeal' is meant to be an immutable object used for comparing the initial settings with possible changes to the meal
   const initialMeal = mealContents
@@ -30,6 +39,7 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
 
   // Refresh 'currentMeal' whenever a new meal is clicked in the browser
   useEffect(() => {
+    setModalIsActive(false)
     setCurrentMeal(mealContents)
   }, [mealContents])
 
@@ -47,8 +57,29 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
 
   const mealTypeName = getTypeNameForMealId(props.meal.type, props.types)
   
+  const onDelete = () => {
+    if (props.meal) {
+      deleteMealEndpoint.mutate(props.meal.meal_id)
+    }
+  }
+
+  const onCancel = () => {
+    setModalIsActive(false)
+  }
+
   return (
     <div id='container-right--active'>
+      <Modal 
+        active={modalIsActive} 
+        element={
+          <DeleteMealDisclaimer 
+            onCancel={onCancel}
+            onDelete={onDelete}
+            meal={props.meal}
+            mutation={deleteMealEndpoint}
+          />
+        } 
+      />
       <div className='container-right__header'>
         <div id='summary'>
           <h2>{mealTypeName?.toUpperCase()} - {props.meal.name}</h2>
@@ -66,7 +97,11 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
         />
       </div>
       <div className='container-right__actions'>
-        <button disabled={mealContentsIsLoading || mealContentsIsError} id='delete' />
+        <button 
+          disabled={mealContentsIsLoading || mealContentsIsError} 
+          id='delete' 
+          onClick={() => setModalIsActive(true)}
+        />
         <button 
           disabled={
               (initialMeal == currentMeal) ||
