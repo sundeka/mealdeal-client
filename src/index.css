@@ -679,12 +679,18 @@ Browse
 }
 
 .item_wrapper__title #expand {
+    display: flex;
+    justify-content: center;
     height: 15px;
-    width: 40px;
+    width: 80px;
     border-style: solid;
     border-width: thin;
     margin-inline-end: 15px;
     background-color: rgb(200, 191, 231);;
+}
+
+.item_wrapper__title #expand-icon {
+    user-select: none;
 }
 
 .item_wrapper__row {
@@ -714,6 +720,16 @@ Browse
 
 .browser-frame__item_wrapper #end-padding {
     height: 15px;
+}
+
+.browser-frame__item_wrapper #wrapper-expand {
+    height: auto;
+    visibility: visible;
+}
+
+.browser-frame__item_wrapper #wrapper-collapse {
+    height: 0;
+    visibility: collapse;
 }
 
 .container-right__header {
