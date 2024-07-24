@@ -7,6 +7,7 @@ import { calculateNutrition } from "../../utils/calculateNutrition";
 import InfoPanelContent from "./InfoPanelContent";
 import Modal from "../../components/Modal/Modal";
 import DeleteMealDisclaimer from "./DeleteMealDisclaimer";
+import toast from 'react-hot-toast'
 
 interface BrowserInfoPanelProps {
   meal: Meal | null
@@ -27,7 +28,9 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
   const deleteMealEndpoint = useMutation({ 
     mutationFn: deleteMeal,
     onSuccess: () => {
+      toast.success(`Meal "${props.meal?.name}" deleted successfully!`)
       setModalIsActive(false)
+      props.setCurrentSelection(null)
       props.refreshMealList()
     }
   })
