@@ -9,6 +9,7 @@ import Modal from "../../components/Modal/Modal";
 import DeleteMealDisclaimer from "./DeleteMealDisclaimer";
 import toast from 'react-hot-toast'
 import { parseMealItemsFromCurrentMeal } from "../../utils/parseMealItemsFromCurrentMeal";
+import AddFoodPopup from "./AddFoodPopup";
 
 interface BrowserInfoPanelProps {
   meal: Meal | null
@@ -19,7 +20,8 @@ interface BrowserInfoPanelProps {
 }
 
 const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
-  const [modalIsActive, setModalIsActive] = useState<boolean>(false)
+  const [deletionModal, setDeletionModal] = useState<boolean>(false)
+  const [additionModal, setAdditionModal] = useState<boolean>(false)
   const { data: mealContents, isLoading: mealContentsIsLoading, isError: mealContentsIsError
   } = useQuery(
     ["getMealContents", props.meal?.meal_id],  
@@ -30,7 +32,7 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
     mutationFn: deleteMeal,
     onSuccess: () => {
       toast.success(`Meal "${props.meal?.name}" deleted successfully!`)
-      setModalIsActive(false)
+      setDeletionModal(false)
       props.setCurrentSelection(null)
       props.refreshMealList()
     }
@@ -55,7 +57,8 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
 
   // Refresh 'currentMeal' whenever a new meal is clicked in the browser
   useEffect(() => {
-    setModalIsActive(false)
+    setDeletionModal(false)
+    setAdditionModal(false)
     setCurrentMeal(mealContents)
     setNutritionalFacts(calculateNutrition(props.foods, currentMeal))
   }, [mealContents])
@@ -93,22 +96,29 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
     }
   }
 
-  const onCancel = () => {
-    setModalIsActive(false)
-  }
-
   return (
     <div id='container-right--active'>
       <Modal 
-        active={modalIsActive} 
+        active={deletionModal} 
         element={
           <DeleteMealDisclaimer 
-            onCancel={onCancel}
+            onCancel={() => setDeletionModal(false)}
             onDelete={onDeleteMeal}
             meal={props.meal}
             mutation={deleteMealEndpoint}
           />
         } 
+      />
+      <Modal 
+        active={additionModal}
+        element={
+          <AddFoodPopup
+            foods={props.foods}
+            close={() => setAdditionModal(false)}
+            currentMeal={currentMeal}
+            setCurrentMeal={setCurrentMeal}
+          />
+        }
       />
       <div className='container-right__header'>
         <div id='summary'>
@@ -125,13 +135,14 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
           currentMeal={currentMeal}
           nutritionalFacts={nutritionalFacts}
           onDelete={onDeleteFood}
+          onClickAddFood={() => setAdditionModal(true)}
         />
       </div>
       <div className='container-right__actions'>
         <button 
           disabled={mealContentsIsLoading || updateMealEndpoint.isLoading || mealContentsIsError} 
           id='delete' 
-          onClick={() => setModalIsActive(true)}
+          onClick={() => setDeletionModal(true)}
         />
         <button 
           disabled={

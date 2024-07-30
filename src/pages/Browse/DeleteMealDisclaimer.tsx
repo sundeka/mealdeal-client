@@ -42,7 +42,7 @@ const DeleteMealDisclaimer = (props: DeleteMealDisclaimerProps) => {
     )
   }
   return (
-    <div className='delete-meal-popup'>
+    <div className='info-panel-popup'>
       <div id='root'>
         {render()}
       </div>

@@ -853,10 +853,10 @@ Browse
 }
 
 /*
-'Delete meal' disclaimer pop-up
+Info panel pop-up
 */
 
-.delete-meal-popup #root {
+.info-panel-popup #root {
     width: 200px;
     height: 200px;
     background-color: cornsilk;
@@ -868,15 +868,23 @@ Browse
     align-items: center;
 }
 
-.delete-meal-popup #actions {
+.info-panel-popup #actions {
     width: 120px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.delete-meal-popup span {
+.info-panel-popup span {
     font-style: italic;
     overflow-wrap: anywhere;
     text-align: center;
+}
+
+.info-panel-popup #add-food-content {
+    display: flex;
+    height: 120px;
+    max-width: 120px;
+    flex-direction: column;
+    justify-content: space-around;
 }
