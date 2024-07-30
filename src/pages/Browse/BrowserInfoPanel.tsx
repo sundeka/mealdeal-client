@@ -1,13 +1,14 @@
-import { Food, Meal, MealItem, MealType, NutritionFact } from "../../schema"
+import { Food, Meal, MealItem, MealType, NutritionFact, UpdateMealPayload } from "../../schema"
 import { getTypeNameForMealId } from "../../utils/getTypeNameForMealId";
 import { useMutation, useQuery } from "react-query";
-import { deleteMeal, getMealContents } from "../../api/endpoints";
+import { deleteMeal, getMealContents, putMeal } from "../../api/endpoints";
 import { useEffect, useState } from "react";
 import { calculateNutrition } from "../../utils/calculateNutrition";
 import InfoPanelContent from "./InfoPanelContent";
 import Modal from "../../components/Modal/Modal";
 import DeleteMealDisclaimer from "./DeleteMealDisclaimer";
 import toast from 'react-hot-toast'
+import { parseMealItemsFromCurrentMeal } from "../../utils/parseMealItemsFromCurrentMeal";
 
 interface BrowserInfoPanelProps {
   meal: Meal | null
@@ -34,24 +35,35 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
       props.refreshMealList()
     }
   })
+  const updateMealEndpoint = useMutation({
+    mutationFn: putMeal,
+    onSuccess: () => {
+      toast.success(`Meal "${props.meal?.name}" updated successfully!`)
+      props.refreshMealList()
+    },
+    onError: () => {
+      toast.error(`Unknown error while updating meal "${props.meal?.name}"!`)
+    }
+  })
 
-  // 'initialMeal' is meant to be an immutable object used for comparing the initial settings with possible changes to the meal
-  const initialMeal = mealContents
+  // 'referenceMeal' is meant to be an immutable object used for comparing the initial settings with possible changes to the meal
+  const referenceMeal = mealContents
 
   // 'currentMeal' contains the current contents of the meal, which may have more or less foods in them
-  const [currentMeal, setCurrentMeal] = useState<Map<string, MealItem> | undefined>(initialMeal)
+  const [currentMeal, setCurrentMeal] = useState<Map<string, MealItem> | undefined>(referenceMeal)
   const [nutritionalFacts, setNutritionalFacts] = useState<NutritionFact>(calculateNutrition(props.foods, currentMeal))
 
   // Refresh 'currentMeal' whenever a new meal is clicked in the browser
   useEffect(() => {
     setModalIsActive(false)
     setCurrentMeal(mealContents)
+    setNutritionalFacts(calculateNutrition(props.foods, currentMeal))
   }, [mealContents])
 
-  // Update nutritional content whenever a) new foods are added/removed or b) whenever a new meal is selected in the browser
+  // Update nutritional content whenever new foods are added/removed
   useEffect(() => {
     setNutritionalFacts(calculateNutrition(props.foods, currentMeal))
-  }, [currentMeal, mealContents])
+  }, [currentMeal])
   
   // Hide the info panel if no meal is selected
   if (!props.meal) {
@@ -62,9 +74,22 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
 
   const mealTypeName = getTypeNameForMealId(props.meal.type, props.types)
   
-  const onDelete = () => {
+  const onDeleteMeal = () => {
     if (props.meal) {
       deleteMealEndpoint.mutate(props.meal.meal_id)
+    }
+  }
+
+  const onDeleteFood = (id: string) => {
+    const newCurrentMeal = new Map(currentMeal)
+    newCurrentMeal.delete(id)
+    setCurrentMeal(newCurrentMeal)
+  }
+
+  const onSaveChanges = () => {
+    if (props.meal && currentMeal) {
+      const payload = {id: props.meal.meal_id, mealItems: parseMealItemsFromCurrentMeal(currentMeal)}
+      updateMealEndpoint.mutate(payload)
     }
   }
 
@@ -79,7 +104,7 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
         element={
           <DeleteMealDisclaimer 
             onCancel={onCancel}
-            onDelete={onDelete}
+            onDelete={onDeleteMeal}
             meal={props.meal}
             mutation={deleteMealEndpoint}
           />
@@ -96,24 +121,27 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
       </div>
       <div className='container-right__content'>
         <InfoPanelContent 
-          isLoading={mealContentsIsLoading} 
+          isLoading={mealContentsIsLoading || updateMealEndpoint.isLoading} 
           currentMeal={currentMeal}
           nutritionalFacts={nutritionalFacts}
+          onDelete={onDeleteFood}
         />
       </div>
       <div className='container-right__actions'>
         <button 
-          disabled={mealContentsIsLoading || mealContentsIsError} 
+          disabled={mealContentsIsLoading || updateMealEndpoint.isLoading || mealContentsIsError} 
           id='delete' 
           onClick={() => setModalIsActive(true)}
         />
         <button 
           disabled={
-              (initialMeal == currentMeal) ||
-              mealContentsIsLoading || 
+              (referenceMeal == currentMeal) ||
+              mealContentsIsLoading ||
+              updateMealEndpoint.isLoading || 
               mealContentsIsError ||
               currentMeal?.size == 0
             }
+          onClick={onSaveChanges}
           id='save'>
             Save changes
         </button>

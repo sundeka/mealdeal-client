@@ -7,6 +7,7 @@ interface InfoPanelContentProps {
   isLoading: boolean
   currentMeal: Map<string, MealItem> | undefined
   nutritionalFacts: NutritionFact
+  onDelete: (id: string) => void
 }
 
 const InfoPanelContent = (props: InfoPanelContentProps) => {
@@ -26,7 +27,7 @@ const InfoPanelContent = (props: InfoPanelContentProps) => {
             <h2>Meal contents</h2>
             <button>Add food</button>
           </div>
-          <MealTable currentMeal={props.currentMeal} deleteFood={() => {}}/>
+          <MealTable currentMeal={props.currentMeal} deleteFood={props.onDelete}/>
         </div>
         <div className='content__nutrition-wrapper'>
           <h2>Nutritional facts</h2>

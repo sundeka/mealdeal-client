@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MealItem, MealMetadata } from "../schema";
+import { MealItem, MealMetadata, UpdateMealPayload } from "../schema";
 
 const DEV_BACKEND = "http://127.0.0.1:5000"
 
@@ -50,5 +50,12 @@ export const getMealContents = async (mealId: string | undefined) => {
 export const deleteMeal = async (mealId: string) => {
   return await axios.delete(
     DEV_BACKEND + "/meals/" + mealId
+  )
+}
+
+export const putMeal = async (payload: UpdateMealPayload) => {
+  return await axios.put(
+    DEV_BACKEND + "/meals/" + payload.id,
+    payload.mealItems
   )
 }

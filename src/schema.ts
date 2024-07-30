@@ -62,3 +62,11 @@ export type MealMetadata = {
   type: number
   events: MealItem[]
 }
+
+/**
+ * 
+ */
+export type UpdateMealPayload = {
+  id: string,
+  mealItems: MealItem[]
+}
