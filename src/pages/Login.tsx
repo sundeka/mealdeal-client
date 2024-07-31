@@ -4,10 +4,11 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { login } from '../api/endpoints';
 import toast from 'react-hot-toast';
+import { UserObject } from '../schema';
 
 
 interface LoginProps {
-  setLoggedIn: (value: boolean) => void;
+  setUser: (value: UserObject) => void;
 }
 
 const Login = (props: LoginProps) => {
@@ -19,7 +20,7 @@ const Login = (props: LoginProps) => {
       mutationFn: login,
       onSuccess: () => {
         toast.dismiss()
-        props.setLoggedIn(true)
+        props.setUser({id: '', username: ''})
         navigate('/home')
       },
       onMutate: () => {
@@ -69,11 +70,16 @@ const Login = (props: LoginProps) => {
               onClick={
                 () => loginMutation.mutate({username: username, password: password})
               }
-              disabled={!username || !password}
+              disabled={!username || !password || loginMutation.isLoading}
               >
                 Login
             </button>
           </div>
+        </div>
+        <div className='login-container__disclaimer'>
+          <p>Credentials for testing:</p>
+          <p>Username: testuser</p>
+          <p>Password: testpass</p>
         </div>
       </div>
     </div>

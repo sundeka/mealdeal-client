@@ -3,6 +3,11 @@ export type LoginProps = {
   password: string
 }
 
+export type UserObject = {
+  id: string
+  username: string
+}
+
 /**
  * Represents a single food received from the database table 'foods'
  */

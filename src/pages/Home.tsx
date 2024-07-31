@@ -1,9 +1,17 @@
+import { Navigate } from "react-router-dom";
 import Header from "../components/Header/Header"
+import { UserObject } from "../schema";
 
-const Home = () => {
+interface HomeProps {
+  user: UserObject | null;
+  setUser: React.Dispatch<React.SetStateAction<UserObject | null>>
+}
+
+const Home = (props: HomeProps) => {
+  if (!props.user) { return <Navigate to="/" replace />; }
   return (
     <>
-      <Header />
+      <Header user={props.user} setUser={props.setUser} />
       <div className='home-root'>
         <h1 className='home-root__h1'>Welcome to MealDeal!</h1>
         <div className='home-root__intro-container'>

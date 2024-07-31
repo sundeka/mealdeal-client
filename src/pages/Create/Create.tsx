@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { MealItem, NutritionFact } from '../../schema'
+import { MealItem, NutritionFact, UserObject } from '../../schema'
 import Header from "../../components/Header/Header"
 import Insert from './Insert'
 import CurrentMeal from './CurrentMeal'
@@ -9,6 +9,12 @@ import { useMutation, useQuery } from "react-query";
 import { calculateNutrition } from '../../utils/calculateNutrition'
 import { MoonLoader } from 'react-spinners'
 import NutritionalFacts from '../../components/NutritionalFacts/NutritionalFacts'
+import { Navigate } from 'react-router-dom'
+
+interface CreateProps {
+  user: UserObject | null
+  setUser: React.Dispatch<React.SetStateAction<UserObject | null>>
+}
 
 const nutritionInit: NutritionFact = {
   calories: 0,
@@ -21,7 +27,7 @@ const nutritionInit: NutritionFact = {
   salt: 0
 }
 
-const Create = () => {
+const Create = (props: CreateProps) => {
   const [currentMeal, setCurrentMeal] = useState<Map<string, MealItem>>(new Map<string, MealItem>());
   const [currentNutrition, setCurrentNutrition] = useState<NutritionFact>(nutritionInit);
   const { data: foods, isError: foodsIsError, isLoading: foodsIsLoading } = useQuery("getFoods", getFoods, { refetchOnWindowFocus: false });
@@ -32,7 +38,6 @@ const Create = () => {
   )
   
   useEffect(() => {
-    console.log(currentMeal)
     if (foods) {
       setCurrentNutrition(calculateNutrition(foods, currentMeal))
     }
@@ -40,6 +45,8 @@ const Create = () => {
       setCurrentNutrition(nutritionInit)
     }
   }, [currentMeal])
+
+  if (!props.user) { return <Navigate to="/" replace />; }
   
   const addFood = (foodId: string, name: string, amount: number) => {
     const payload: MealItem = { foodId, name, amount };
@@ -94,7 +101,7 @@ const Create = () => {
 
   return (
     <>
-      <Header />
+      <Header user={props.user} setUser={props.setUser} />
       <div className='create-root'>
         {renderMealFrame()}
         <div id='lane' className='create-root__meal-content'>

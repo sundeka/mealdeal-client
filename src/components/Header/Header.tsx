@@ -1,11 +1,20 @@
 import logo from '../../assets/images/logo.png'
 import { Link, useNavigate } from 'react-router-dom';
+import { UserObject } from '../../schema';
 
-const Header = () => {
+interface HeaderProps {
+  user: UserObject | null
+  setUser: React.Dispatch<React.SetStateAction<UserObject | null>>
+}
+
+const Header = (props: HeaderProps) => {
   const navigate = useNavigate();
+
   const onLogout = () => {
+    props.setUser(null)
     navigate('/')
   }
+  
   return (
     <header className='header'>
       <div className='header__container-logo'>

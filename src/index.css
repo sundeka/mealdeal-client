@@ -127,6 +127,23 @@ Login
     height: 40px;
 }
 
+.login-container__disclaimer {
+    width: 76%;
+    height: 100px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-evenly;
+    border-style: dotted;
+    border-width: thin;
+}
+
+.login-container__disclaimer p {
+    align-self: center;
+    font-size: small;
+}
+
 /* 
 Header
 */
