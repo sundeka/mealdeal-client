@@ -1,7 +1,20 @@
 import axios from "axios";
-import { MealItem, MealMetadata, UpdateMealPayload } from "../schema";
+import { LoginProps, MealItem, MealMetadata, UpdateMealPayload } from "../schema";
+import { Base64 } from 'base64-string';
 
 const DEV_BACKEND = "http://127.0.0.1:5000"
+
+export const login = async (credentials: LoginProps) => {
+  const enc = new Base64();
+  const credsBase64 = enc.encode(`${credentials.username}:${credentials.password}`)
+  return await axios.post(
+    DEV_BACKEND + "/login", {
+      headers: {
+        'Authorization': `Basic ${credsBase64}`
+      }
+    }
+  )
+}
 
 export const getFoods = async () => {
   const response = await axios.get(

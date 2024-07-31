@@ -1,3 +1,8 @@
+export type LoginProps = {
+  username: string
+  password: string
+}
+
 /**
  * Represents a single food received from the database table 'foods'
  */

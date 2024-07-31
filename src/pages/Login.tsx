@@ -1,6 +1,9 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import logo from '../assets/images/logo.png'
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from 'react-query';
+import { login } from '../api/endpoints';
+import toast from 'react-hot-toast';
 
 
 interface LoginProps {
@@ -8,22 +11,33 @@ interface LoginProps {
 }
 
 const Login = (props: LoginProps) => {
+  const navigate = useNavigate();
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
-  const navigate = useNavigate();
-
+  const loginMutation = useMutation(
+    {
+      mutationFn: login,
+      onSuccess: () => {
+        toast.dismiss()
+        props.setLoggedIn(true)
+        navigate('/home')
+      },
+      onMutate: () => {
+        toast.loading("Logging in...")
+      },
+      onError: (error: any) => {
+        toast.dismiss()
+        toast.error(`Unable to login: ${error}`)
+      },
+    }
+  )
+  
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value)
   }
 
   const handlePasswordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setPassword(e.target.value)
-  }
-
-  const onLogin = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.preventDefault()
-    props.setLoggedIn(true)
-    navigate('/home');
   }
 
   return (
@@ -38,13 +52,27 @@ const Login = (props: LoginProps) => {
           <div className='login-box__form'>
             <label>Username:</label>
             <div style={{height: 5}}/>
-            <input/>
+            <input
+              type='name'
+              onChange={handleUsernameChange}
+            />
             <div style={{height: 10}}/>
             <label>Password:</label>
             <div style={{height: 5}}/>
-            <input/>
+            <input 
+              type='password'
+              onChange={handlePasswordChange}
+            />
             <div style={{height: 30}}/>
-            <button className='login-box__form__login-button' onClick={onLogin}>Login</button>
+            <button 
+              className='login-box__form__login-button' 
+              onClick={
+                () => loginMutation.mutate({username: username, password: password})
+              }
+              disabled={!username || !password}
+              >
+                Login
+            </button>
           </div>
         </div>
       </div>
