@@ -8,7 +8,9 @@ export const login = async (credentials: LoginProps) => {
   const enc = new Base64();
   const credsBase64 = enc.encode(`${credentials.username}:${credentials.password}`)
   return await axios.post(
-    DEV_BACKEND + "/login", {
+    DEV_BACKEND + "/login", 
+    {},
+    {
       headers: {
         'Authorization': `Basic ${credsBase64}`
       }

@@ -4,14 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { login } from '../api/endpoints';
 import toast from 'react-hot-toast';
-import { UserObject } from '../schema';
 
-
-interface LoginProps {
-  setUser: (value: UserObject) => void;
-}
-
-const Login = (props: LoginProps) => {
+const Login = () => {
   const navigate = useNavigate();
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
@@ -20,7 +14,6 @@ const Login = (props: LoginProps) => {
       mutationFn: login,
       onSuccess: () => {
         toast.dismiss()
-        props.setUser({id: '', username: ''})
         navigate('/home')
       },
       onMutate: () => {
