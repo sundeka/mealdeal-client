@@ -1,9 +1,10 @@
 import { ChangeEvent, useState } from 'react';
 import logo from '../assets/images/logo.png'
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { useMutation } from 'react-query';
 import { login } from '../api/endpoints';
 import toast from 'react-hot-toast';
+import { AxiosResponse } from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,8 +13,9 @@ const Login = () => {
   const loginMutation = useMutation(
     {
       mutationFn: login,
-      onSuccess: () => {
+      onSuccess: (data: AxiosResponse<any, any>) => {
         toast.dismiss()
+        localStorage.setItem('token', data.data['token'])
         navigate('/home')
       },
       onMutate: () => {
@@ -26,6 +28,10 @@ const Login = () => {
     }
   )
   
+  if (localStorage.getItem('token')) {
+    return <Navigate to="/home" replace />
+  }
+
   const handleUsernameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUsername(e.target.value)
   }

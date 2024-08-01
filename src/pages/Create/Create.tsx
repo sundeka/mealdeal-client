@@ -41,6 +41,10 @@ const Create = () => {
     }
   }, [currentMeal])
   
+  if (!localStorage.getItem('token')) {
+    return <Navigate to="/" replace />
+  }
+
   const addFood = (foodId: string, name: string, amount: number) => {
     const payload: MealItem = { foodId, name, amount };
     if (currentMeal.has(foodId)) {

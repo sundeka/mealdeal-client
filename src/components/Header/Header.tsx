@@ -4,8 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const navigate = useNavigate();
-
+  
   const onLogout = () => {
+    localStorage.clear()
     navigate('/')
   }
   
