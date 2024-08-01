@@ -20,21 +20,36 @@ export const login = async (credentials: LoginProps) => {
 
 export const getFoods = async () => {
   const response = await axios.get(
-    DEV_BACKEND + "/foods"
+    DEV_BACKEND + "/foods",
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
   );
   return response.data;
 };
 
 export const getFoodTypes = async () => {
   const response = await axios.get(
-    DEV_BACKEND + "/types"
+    DEV_BACKEND + "/types",
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
   );
   return response.data;
 }
 
 export const getMeals = async () => {
   const response = await axios.get(
-    DEV_BACKEND + "/meals"
+    DEV_BACKEND + "/meals",
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
   );
   return response.data;
 }
@@ -42,14 +57,24 @@ export const getMeals = async () => {
 export const postCreateMeal = async (mealData: MealMetadata) => {
   return await axios.post(
     DEV_BACKEND + "/create",
-    mealData
+    mealData,
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
   )
 }
 
 export const getMealContents = async (mealId: string | undefined) => {
   if (mealId) {
     const response = await axios.get(
-      DEV_BACKEND + "/events/meals/" + mealId
+      DEV_BACKEND + "/events/meals/" + mealId,
+      {
+        headers: {
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
+        }
+      }
     )
     if (response.data) {
       const contents = new Map<string, MealItem>()
@@ -64,13 +89,23 @@ export const getMealContents = async (mealId: string | undefined) => {
 
 export const deleteMeal = async (mealId: string) => {
   return await axios.delete(
-    DEV_BACKEND + "/meals/" + mealId
+    DEV_BACKEND + "/meals/" + mealId,
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
   )
 }
 
 export const putMeal = async (payload: UpdateMealPayload) => {
   return await axios.put(
     DEV_BACKEND + "/meals/" + payload.id,
-    payload.mealItems
+    payload.mealItems,
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
   )
 }
