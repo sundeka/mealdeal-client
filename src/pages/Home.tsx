@@ -10,7 +10,7 @@ const Home = () => {
     <>
       <Header />
       <div className='home-root'>
-        <h1 className='home-root__h1'>Welcome to MealDeal, {!localStorage.getItem('username')}!</h1>
+        <h1 className='home-root__h1'>Welcome to MealDeal, {localStorage.getItem('username')}!</h1>
         <div className='home-root__intro-container'>
           <p>
           Aimed for fitness enthusiasts, <strong>MealDeal</strong> is a nutrition planning application 
