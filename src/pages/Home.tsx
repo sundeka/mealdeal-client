@@ -5,34 +5,52 @@ const Home = () => {
   if (!localStorage.getItem('token')) {
     return <Navigate to="/" replace />
   }
+
   return (
     <>
       <Header />
       <div className='home-root'>
-        <h1 className='home-root__h1'>Welcome to MealDeal!</h1>
+        <h1 className='home-root__h1'>Welcome to MealDeal, {!localStorage.getItem('username')}!</h1>
         <div className='home-root__intro-container'>
-          <div className='intro-container__introduction'>
-            <p className='introduction-text'>
-            <strong>MealDeal</strong> is an application that allows x. 
-            Cras pretium sapien tortor, ac rhoncus est viverra ac. 
-            Sed vehicula vel arcu et elementum. 
-            Sed finibus nisi eu lacus congue commodo.
-            </p>
+          <p>
+          Aimed for fitness enthusiasts, <strong>MealDeal</strong> is a nutrition planning application 
+          that allows its users to monitor their calorie & micronutrient intake for each meal they consume. 
+          MealDeal can be used for a variety of use cases: weight loss, weight gain or just general nutrient intake management.
+          </p>
+        </div>
+        <div className="home-root__quick-menu">
+          <div className="quick-menu__item">
+            <h1>
+              &#127858;
+              <a href="./create"> New meal</a>
+            </h1>
+            <div className="item-title-divider" />
           </div>
-          <div className='intro-container__statistics-container'>
-            <p className='statistics-container__header'>Here are some statistics about you:</p>
-            <div className='statistics-container__stat-row'>
-              <p className='stat-row--name'>Name:</p>
-              <p className='stat-row--stat'>username1234</p>
-            </div>
-            <div className='statistics-container__stat-row'>
-              <p className='stat-row--name'>Account created:</p>
-              <p className='stat-row--stat'>29.06.2024 12:03</p>
-            </div>
-            <div className='statistics-container__stat-row'>
-              <p className='stat-row--name'>Created meals:</p>
-              <p className='stat-row--stat'>22</p>
-            </div>
+          <div className="quick-menu__item">
+            <h1>
+              &#128269;
+              <a href="./browse"> Browse meals</a>
+            </h1>
+            <div className="item-title-divider" />
+          </div>
+          <div className="quick-menu__item">
+            <h1>
+              &#128221;
+              <a href="./plans"> Meal plans</a>
+            </h1>
+            <div className="item-title-divider" />
+            <p>
+              A competition coming up? Gearing up for your next training block?
+            </p>
+            <br />
+            <p>
+              Worry not. With MealDeal, you can design your weekly calorie intake conveniently in advance.
+            </p>
+            <br />
+            <p>
+              With MealDeal's meal planner, you can make use of the meals you have created in advance
+              to design a weekly meal plan that is tailored just for your calorie needs.
+            </p>
           </div>
         </div>
       </div>

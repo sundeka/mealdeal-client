@@ -21,7 +21,7 @@ const Header = () => {
         <span className='container-logo__text'>MealDeal</span>
       </div>
       <div className='header__container-navigation'>
-        <a href='../create'>Create meal</a>
+        <a href='../create'>New meal</a>
         <div style={{width: 15}}/>
         <a href='../browse'>Browse meals</a>
         <div style={{width: 15}}/>
