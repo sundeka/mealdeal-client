@@ -62,6 +62,7 @@ export type MealType = {
  */
 export type MealMetadata = {
   mealId: string,
+  userId: string | null,
   name: string,
   description: string | null,
   type: number

@@ -49,6 +49,7 @@ const Metadata = (props: MetadataProps) => {
       const mealEvents = serializeCurrentMeal(props.currentMeal)
       const meal: MealMetadata = {
         mealId: uuidv4(),
+        userId: localStorage.getItem('user_id'),
         name: name,
         description: description,
         type: type,

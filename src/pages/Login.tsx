@@ -16,6 +16,7 @@ const Login = () => {
       onSuccess: (data: AxiosResponse<any, any>) => {
         toast.dismiss()
         localStorage.setItem('token', data.data['token'])
+        localStorage.setItem('user_id', data.data['user_id'])
         navigate('/home')
       },
       onMutate: () => {
@@ -23,7 +24,11 @@ const Login = () => {
       },
       onError: (error: any) => {
         toast.dismiss()
-        toast.error(`Unable to login: ${error}`)
+        if (error.response.data.message) {
+          toast.error(error.response.data.message)
+        } else {
+          toast.error(`Unable to login: ${error}`)
+        }        
       },
     }
   )

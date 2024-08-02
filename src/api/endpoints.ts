@@ -44,10 +44,10 @@ export const getFoodTypes = async () => {
 
 export const getMeals = async () => {
   const response = await axios.get(
-    DEV_BACKEND + "/meals",
+    DEV_BACKEND + "/meals/" + localStorage.getItem('user_id'),
     {
       headers: {
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
       }
     }
   );
