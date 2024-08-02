@@ -17,6 +17,7 @@ const Login = () => {
         toast.dismiss()
         localStorage.setItem('token', data.data['token'])
         localStorage.setItem('user_id', data.data['user_id'])
+        localStorage.setItem('username', data.data['username'])
         navigate('/home')
       },
       onMutate: () => {
