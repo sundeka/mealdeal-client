@@ -10,6 +10,7 @@ import { calculateNutrition } from '../../utils/calculateNutrition'
 import { MoonLoader } from 'react-spinners'
 import NutritionalFacts from '../../components/NutritionalFacts/NutritionalFacts'
 import { Navigate } from 'react-router-dom'
+import { tokenIsInvalid } from '../../utils/tokenIsInvalid'
 
 const nutritionInit: NutritionFact = {
   calories: 0,
@@ -41,7 +42,8 @@ const Create = () => {
     }
   }, [currentMeal])
   
-  if (!localStorage.getItem('token')) {
+  if (tokenIsInvalid()) {
+    localStorage.clear()
     return <Navigate to="/" replace />
   }
 

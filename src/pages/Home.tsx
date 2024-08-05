@@ -1,8 +1,10 @@
 import { Navigate } from "react-router-dom"
 import Header from "../components/Header/Header"
+import { tokenIsInvalid } from "../utils/tokenIsInvalid"
 
 const Home = () => {
-  if (!localStorage.getItem('token')) {
+  if (tokenIsInvalid()) {
+    localStorage.clear()
     return <Navigate to="/" replace />
   }
 

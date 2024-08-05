@@ -5,13 +5,15 @@ import BrowseContentPage from "./BrowseContentPage";
 import BrowseLoadingPage from "./BrowseLoadingPage";
 import { getFoods, getFoodTypes, getMeals } from "../../api/endpoints";
 import { Navigate } from "react-router-dom";
+import { tokenIsInvalid } from "../../utils/tokenIsInvalid";
 
 const Browse = () => {
   const { data: meals, isLoading: mealsIsLoading, refetch: refetchMeals } = useQuery("getMeals", getMeals, { refetchOnWindowFocus: false });
   const { data: types, isLoading: typesIsLoading, refetch: refetchTypes } = useQuery("getFoodTypes", getFoodTypes, { refetchOnWindowFocus: false });
   const { data: foods, isLoading: foodsIsLoading, refetch: refetchFoods } = useQuery("getFoods", getFoods, { refetchOnWindowFocus: false } )
 
-  if (!localStorage.getItem('token')) {
+  if (tokenIsInvalid()) {
+    localStorage.clear()
     return <Navigate to="/" replace />
   }
 
