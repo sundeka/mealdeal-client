@@ -1,11 +1,30 @@
 import { Navigate } from "react-router-dom"
 import Header from "../components/Header/Header"
 import { tokenIsInvalid } from "../utils/tokenIsInvalid"
+import { useQuery } from "react-query";
+import { getMetadata } from "../api/endpoints";
+import { MoonLoader } from "react-spinners";
+import toast from "react-hot-toast";
 
 const Home = () => {
+  const { isLoading: metadataIsLoading, isError: metadataIsError } = useQuery("getMetadata", getMetadata, { refetchOnWindowFocus: false });
+  
   if (tokenIsInvalid()) {
     localStorage.clear()
     return <Navigate to="/" replace />
+  }
+
+  if (metadataIsLoading) {
+    return (
+      <div className="home-root--loading-metadata">
+        <MoonLoader />
+        <span>Please wait...</span>
+      </div>
+    )
+  }
+
+  if (metadataIsError) {
+    toast.error("Unable to load user metadata. Some of the features might appear buggy.")
   }
 
   return (

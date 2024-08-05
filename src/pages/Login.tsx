@@ -8,6 +8,7 @@ import { AxiosResponse } from 'axios';
 
 const Login = () => {
   const navigate = useNavigate();
+
   const [username, setUsername] = useState<string>('')
   const [password, setPassword] = useState<string>('')
   const loginMutation = useMutation(
@@ -17,7 +18,6 @@ const Login = () => {
         toast.dismiss()
         localStorage.setItem('token', data.data['token'])
         localStorage.setItem('user_id', data.data['user_id'])
-        localStorage.setItem('username', data.data['username'])
         navigate('/home')
       },
       onMutate: () => {

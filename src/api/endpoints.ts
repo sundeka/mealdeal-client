@@ -18,6 +18,21 @@ export const login = async (credentials: LoginProps) => {
   )
 }
 
+export const getMetadata = async () => {
+  const response = await axios.get(
+    DEV_BACKEND + "/metadata/" + localStorage.getItem('user_id'),
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
+  );
+  localStorage.setItem('username', response.data['username'])
+  localStorage.setItem("meals_created", response.data['meals_created'])
+  localStorage.setItem("account_created", response.data['account_created'])
+  return
+}
+
 export const getFoods = async () => {
   const response = await axios.get(
     DEV_BACKEND + "/foods",
