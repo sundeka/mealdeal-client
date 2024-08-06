@@ -2,8 +2,8 @@ import { useState } from "react"
 import { PlanPage } from "./Plans"
 import { Plan } from "../../schema"
 import { v4 as uuidv4 } from 'uuid';
-import { useMutation } from "react-query";
-import { postCreatePlan } from "../../api/endpoints";
+import { useMutation, useQuery } from "react-query";
+import { getMetadata, postCreatePlan } from "../../api/endpoints";
 import toast from "react-hot-toast";
 
 interface PlanCreatorProps {
@@ -11,6 +11,7 @@ interface PlanCreatorProps {
 }
 
 const PlanCreator = (props: PlanCreatorProps) => {
+  const { refetch: refetchMetadata } = useQuery("getMetadata", getMetadata, { refetchOnWindowFocus: false });
   const createPlanEndpoint = useMutation(
     { 
       mutationFn: postCreatePlan,
@@ -24,6 +25,7 @@ const PlanCreator = (props: PlanCreatorProps) => {
       onSuccess: (data: any) => {
         toast.dismiss()
         toast.success(`Plan "${data.data.name}" created!`)
+        refetchMetadata()
         // redirect
       }
     }
