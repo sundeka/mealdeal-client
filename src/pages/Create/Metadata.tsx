@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { MealItem, MealMetadata, MealType } from '../../schema'
 import { UseMutationResult, useQuery } from 'react-query'
-import { getFoodTypes } from '../../api/endpoints'
+import { getFoodTypes, getMetadata } from '../../api/endpoints'
 import { AxiosResponse } from 'axios'
 import { serializeCurrentMeal } from '../../utils/serializeCurrentMeal'
 import { v4 as uuidv4 } from 'uuid';
@@ -18,6 +18,7 @@ const Metadata = (props: MetadataProps) => {
   const [type, setType] = useState<number | null>(null)
   const [description, setDescription] = useState<string | null>(null)
   const { data: types, isError: typesIsError, isLoading: typesIsLoading } = useQuery("getFoodTypes", getFoodTypes, { refetchOnWindowFocus: false });
+  const { refetch: refetchMetadata } = useQuery("getMetadata", getMetadata, { refetchOnWindowFocus: false });
 
   useEffect(() => {
     toast.dismiss()
@@ -26,6 +27,7 @@ const Metadata = (props: MetadataProps) => {
     } else if (props.mutation.isLoading) {
       toast.loading("Creating a new meal...")
     } else if (props.mutation.isSuccess) {
+      refetchMetadata()
       toast.success("New meal created!")
     }
   }, [props.mutation.isError, props.mutation.isLoading, props.mutation.isSuccess])

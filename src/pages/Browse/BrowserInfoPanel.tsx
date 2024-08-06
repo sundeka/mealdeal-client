@@ -1,7 +1,7 @@
 import { Food, Meal, MealItem, MealType, NutritionFact, UpdateMealPayload } from "../../schema"
 import { getTypeNameForMealId } from "../../utils/getTypeNameForMealId";
 import { useMutation, useQuery } from "react-query";
-import { deleteMeal, getMealContents, putMeal } from "../../api/endpoints";
+import { deleteMeal, getMealContents, getMetadata, putMeal } from "../../api/endpoints";
 import { useEffect, useState } from "react";
 import { calculateNutrition } from "../../utils/calculateNutrition";
 import InfoPanelContent from "./InfoPanelContent";
@@ -28,6 +28,7 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
     () => getMealContents(props.meal?.meal_id), 
     { refetchOnWindowFocus: false }
   );
+  const { refetch: refetchMetadata } = useQuery("getMetadata", getMetadata, { refetchOnWindowFocus: false });
   const deleteMealEndpoint = useMutation({ 
     mutationFn: deleteMeal,
     onSuccess: () => {
@@ -35,6 +36,7 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
       setDeletionModal(false)
       props.setCurrentSelection(null)
       props.refreshMealList()
+      refetchMetadata()
     }
   })
   const updateMealEndpoint = useMutation({
