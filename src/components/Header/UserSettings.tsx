@@ -25,11 +25,13 @@ const UserSettings = (props: UserSettingsProps) => {
       <div id='title'>
         <p>Username:</p>
         <p>Created meals:</p>
+        <p>Created plans:</p>
         <p>Account created:</p>
       </div>
       <div id='data'>
         <p>{localStorage.getItem('username')}</p>
         <p>{localStorage.getItem('meals_created')}</p>
+        <p>{localStorage.getItem('plans_created')}</p>
         <p>{formatFinnishDate(localStorage.getItem('account_created'))}</p>
       </div>
     </div>

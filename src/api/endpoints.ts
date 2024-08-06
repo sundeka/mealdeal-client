@@ -29,6 +29,7 @@ export const getMetadata = async () => {
   );
   localStorage.setItem('username', response.data['username'])
   localStorage.setItem("meals_created", response.data['meals_created'])
+  localStorage.setItem("plans_created", response.data['plans_created'])
   localStorage.setItem("account_created", response.data['account_created'])
   return
 }
