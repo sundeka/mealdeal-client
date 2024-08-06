@@ -6,7 +6,7 @@ import NotFound from './pages/NotFound';
 import Home from './pages/Home';
 import Create from './pages/Create/Create';
 import Browse from './pages/Browse/Browse';
-import Plans from './pages/Plans';
+import Plans from './pages/Plans/Plans';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { Toaster } from 'react-hot-toast';
 

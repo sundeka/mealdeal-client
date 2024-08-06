@@ -1,9 +1,10 @@
-import { Food, Meal, MealItem, MealType, NutritionFact, UpdateMealPayload } from "../../schema"
+import { Food, Meal, MealItem, MealType, NutritionFact } from "../../schema"
 import { getTypeNameForMealId } from "../../utils/getTypeNameForMealId";
 import { useMutation, useQuery } from "react-query";
 import { deleteMeal, getMealContents, getMetadata, putMeal } from "../../api/endpoints";
 import { useEffect, useState } from "react";
 import { calculateNutrition } from "../../utils/calculateNutrition";
+import { FaTrash } from "react-icons/fa";
 import InfoPanelContent from "./InfoPanelContent";
 import Modal from "../../components/Modal/Modal";
 import DeleteMealDisclaimer from "./DeleteMealDisclaimer";
@@ -145,7 +146,9 @@ const BrowserInfoPanel = (props: BrowserInfoPanelProps) => {
           disabled={mealContentsIsLoading || updateMealEndpoint.isLoading || mealContentsIsError} 
           id='delete' 
           onClick={() => setDeletionModal(true)}
-        />
+        >
+          <FaTrash />
+        </button>
         <button 
           disabled={
               (referenceMeal == currentMeal) ||

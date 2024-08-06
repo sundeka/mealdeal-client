@@ -26,7 +26,7 @@ const MealTable = (props: MealTableProps) => {
             <span className='table__cell--a'>{food.name}</span>
             <span className='table__cell--b'>{food.amount} g</span>
             <button className='row__delete-button' onClick={() => props.deleteFood(id)}>
-              {/*img*/}
+              <span>X</span>
             </button>
           </div>
         ))}
