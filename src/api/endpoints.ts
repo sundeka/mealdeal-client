@@ -1,5 +1,5 @@
 import axios from "axios";
-import { LoginProps, MealItem, MealMetadata, UpdateMealPayload } from "../schema";
+import { LoginProps, MealItem, MealMetadata, Plan, UpdateMealPayload } from "../schema";
 import { Base64 } from 'base64-string';
 
 const DEV_BACKEND = "http://127.0.0.1:5000"
@@ -117,6 +117,18 @@ export const putMeal = async (payload: UpdateMealPayload) => {
   return await axios.put(
     DEV_BACKEND + "/meals/" + payload.id,
     payload.mealItems,
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      }
+    }
+  )
+}
+
+export const postCreatePlan = async (payload: Plan) => {
+  return await axios.post(
+    DEV_BACKEND + "/plans",
+    payload,
     {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('token')}`

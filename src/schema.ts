@@ -76,3 +76,14 @@ export type UpdateMealPayload = {
   id: string,
   mealItems: MealItem[]
 }
+
+/*
+* Represents a new meal plan
+*/
+export type Plan = {
+  planId: string,
+  name: string,
+  description: string | null,
+  length: number,
+  createdAt: string
+}
