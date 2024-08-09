@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { PlanPage } from "./Plans"
 import { Plan } from "../../schema"
 import { v4 as uuidv4 } from 'uuid';
 import { useMutation, useQuery } from "react-query";
@@ -7,7 +6,7 @@ import { getMetadata, postCreatePlan } from "../../api/endpoints";
 import toast from "react-hot-toast";
 
 interface PlanCreatorProps {
-  setSelectedView: React.Dispatch<React.SetStateAction<PlanPage | null>>
+  setActionView: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const PlanCreator = (props: PlanCreatorProps) => {
@@ -51,7 +50,7 @@ const PlanCreator = (props: PlanCreatorProps) => {
     <div className="plan-root--create">
       <div className="plan-root--create__header"> 
         <h1>New plan</h1>
-        <button onClick={() => props.setSelectedView(null)}>Go back</button>
+        <button onClick={() => props.setActionView(true)}>Go back</button>
       </div>
       <div className="plan-root--create__data-box">
         <div id="inputs">
@@ -78,6 +77,7 @@ const PlanCreator = (props: PlanCreatorProps) => {
               <option value="8">8</option>
               <option value="10">10</option>
               <option value="12">12</option>
+              <option value="continuous">Continous</option>
             </select>
           </div>
         </div>
