@@ -14,10 +14,8 @@ const PlanList = (props: PlanListProps) => {
     props.setSelectedPlan(plan)
     props.setActionView(false)
   }
-
-  console.log(props.plans)
   
-  if (props.plans.length > 0) {
+  if (props.plans && props.plans.length > 0) {
     return (
       <div className="actions__plan-list">
         {

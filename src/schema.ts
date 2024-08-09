@@ -84,6 +84,7 @@ export type Plan = {
   planId: string,
   name: string,
   description: string | null,
-  length: number,
-  createdAt: string
+  length: number | undefined,
+  createdAt: string,
+  startingFrom: string | null
 }

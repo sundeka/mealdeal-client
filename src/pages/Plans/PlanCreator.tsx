@@ -1,9 +1,11 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Plan } from "../../schema"
 import { v4 as uuidv4 } from 'uuid';
 import { useMutation, useQuery } from "react-query";
 import { getMetadata, postCreatePlan } from "../../api/endpoints";
 import toast from "react-hot-toast";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 interface PlanCreatorProps {
   setActionView: React.Dispatch<React.SetStateAction<boolean>>
@@ -32,7 +34,16 @@ const PlanCreator = (props: PlanCreatorProps) => {
   
   const [name, setName] = useState<string>('')
   const [description, setDescription] = useState<string>('')
-  const [length, setLength] = useState<string>("1")
+  const [length, setLength] = useState<number | undefined>(1)
+  const [startingFrom, setStartingFrom] = useState<Date | null>(new Date())
+  
+  useEffect(() => {
+    if (!length) {
+      setStartingFrom(null)
+    } else {
+      setStartingFrom(new Date())
+    }
+  }, [length])
   
   const onCreate = () => {
     const now = new Date()
@@ -40,10 +51,20 @@ const PlanCreator = (props: PlanCreatorProps) => {
       planId: uuidv4(),
       name: name,
       description: description,
-      length: Number(length),
-      createdAt: now.toISOString()
+      length: length,
+      createdAt: now.toISOString(),
+      startingFrom: startingFrom ? startingFrom.toISOString() : null
     }
     createPlanEndpoint.mutate(plan)
+  }
+
+  const onChangeLength = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const selection = e.target.value 
+    if (!selection) { // selection = "continuous" {}
+      setLength(undefined)
+    } else {
+      setLength(Number(selection))
+    }
   }
 
   return (
@@ -54,22 +75,23 @@ const PlanCreator = (props: PlanCreatorProps) => {
       </div>
       <div className="plan-root--create__data-box">
         <div id="inputs">
-          <div className="data-box__label-container">
+          <div className="data-box__row" id="name">
             <label>Name:</label>
-            <label id="description">Description*:</label>
-            <label>Length (weeks):</label>
-          </div>
-          <div className="data-box__input-container">
             <input 
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => setName(event.target.value)}
             />
+          </div>
+          <div className="data-box__row" id="description">
+            <label>Description*:</label>
             <textarea 
               placeholder="Optional" 
-              id="description" 
               onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => setDescription(event.target.value)}
             />
+          </div>
+          <div className="data-box__row" id="length">
+            <label>Length (weeks):</label>
             <select 
-              onChange={(event: React.ChangeEvent<HTMLSelectElement>) => setLength(event.target.value)}
+              onChange={onChangeLength}
             >
               <option value="1">1</option>
               <option value="2">2</option>
@@ -77,9 +99,19 @@ const PlanCreator = (props: PlanCreatorProps) => {
               <option value="8">8</option>
               <option value="10">10</option>
               <option value="12">12</option>
-              <option value="continuous">Continous</option>
+              <option>Continous</option>
             </select>
           </div>
+          {
+            startingFrom ?
+            <div hidden={startingFrom == null} className="data-box__row" id="starting-from">
+              <label>Starting from:</label>
+              <DatePicker selected={startingFrom} onChange={(date) => setStartingFrom(date)} />
+            </div>
+            :
+            <></>
+          }
+          
         </div>
         <div id="actions">
           <button 
