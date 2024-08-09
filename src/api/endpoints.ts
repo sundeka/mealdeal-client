@@ -137,3 +137,15 @@ export const postCreatePlan = async (payload: Plan) => {
     }
   )
 }
+
+export const getPlans = async () => {
+  const response = await axios.get(
+    DEV_BACKEND + "/plans/" + localStorage.getItem('user_id'),
+    {
+      headers: {
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+      }
+    }
+  );
+  return response.data;
+}
