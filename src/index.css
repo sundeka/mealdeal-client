@@ -979,23 +979,63 @@ Plans (action selection view)
 
 .plan-root--selection h2 {
     font-size: 1.1vw;
+}
+
+.plan-root--selection #new {
     color: darkblue;
+    align-self: flex-start;
+    font-size: 0.8vw;
 }
 
 .plan-root--selection p {
     font-size: 1vw;
 }
 
-.plan-root--selection h2:hover {
+.plan-root--selection #new:hover {
     text-decoration: underline;
 }
 
 .plan-root--selection__actions {
-    padding-left: 3vw;
-    width: 27vw;
+    gap: 0.5vw;
+    width: 21vw;
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.actions__plan-list {
+    background-color: white;
+    border-style: solid;
+    border-width: thin;
+    width: 20vw;
+    max-height: 20vh;
+    padding-top: 0.5vw;
+    padding-left: 1vw;
+    padding-right: 1vw;
+}
+
+#empty.actions__plan-list {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 2vh;
+    padding-bottom: 0.5vw;
+}
+
+#loading.actions__plan-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.plan-list__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1vw;
 }
 
 /*
